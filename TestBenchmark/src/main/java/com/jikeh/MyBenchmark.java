@@ -25,8 +25,18 @@
 
 package com.jikeh;
 
-import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
 
+import java.util.concurrent.TimeUnit;
+
+
+@BenchmarkMode(Mode.AverageTime) // 测试方法平均执行时间：默认是测试吞吐量
+@OutputTimeUnit(TimeUnit.MICROSECONDS) // 输出结果的时间粒度为微秒
+//@State(Scope.Thread) // 每个测试线程一个实例
 public class MyBenchmark {
 
     @Benchmark
@@ -43,6 +53,17 @@ public class MyBenchmark {
         for (int i = 0; i < 20; i++) {
             sb.append(i);
         }
+    }
+
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include("MyBenchmark")
+                .warmupIterations(10)
+                .measurementIterations(10)
+                .forks(3)
+                .build();
+
+        new Runner(opt).run();
     }
 
 }
