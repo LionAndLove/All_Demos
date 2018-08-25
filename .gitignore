@@ -4,3 +4,10 @@
 /TestBenchmark/TestBenchmark.iml
 /TestBenchmark/.idea
 /TestBenchmark/target
+/spring-boot-hystrix-ad/spring-boot-hystrix-ad.iml
+/spring-boot-hystrix-ad/.idea
+/spring-boot-hystrix-ad/target
+/spring-boot-hystrix-ad/README.md
+/spring-boot-hystrix-cache/spring-boot-hystrix-cache.iml
+/spring-boot-hystrix-cache/.idea
+/spring-boot-hystrix-cache/target
