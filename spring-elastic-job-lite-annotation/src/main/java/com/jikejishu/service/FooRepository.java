@@ -20,9 +20,9 @@
  * </p>
  */
 
-package com.jikeh.elasticjob.lite.fixture.repository;
+package com.jikejishu.service;
 
-import com.jikeh.elasticjob.lite.fixture.entity.Foo;
+import com.jikejishu.model.Foo;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -33,18 +33,23 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class FooRepository {
     
-    private Map<Long, Foo> data = new ConcurrentHashMap<>(400, 1);
+    private Map<Long, Foo> data = new ConcurrentHashMap<>(300, 1);
     
     public FooRepository() {
         init();
     }
-
-    //初始化400条数据：
+    
     private void init() {
         addData(0L, 100L, "Beijing");
         addData(100L, 200L, "Shanghai");
         addData(200L, 300L, "Guangzhou");
         addData(300L, 400L, "HangZhou");
+    }
+    
+    private void addData(final long idFrom, final long idTo, final String location) {
+        for (long i = idFrom; i < idTo; i++) {
+            data.put(i, new Foo(i, location, Foo.Status.TODO));
+        }
     }
     
     public List<Foo> findTodoData(final String location, final int limit) {
@@ -61,12 +66,6 @@ public class FooRepository {
             }
         }
         return result;
-    }
-
-    private void addData(final long idFrom, final long idTo, final String location) {
-        for (long i = idFrom; i < idTo; i++) {
-            data.put(i, new Foo(i, location, Foo.Status.TODO));
-        }
     }
     
     public void setCompleted(final long id) {

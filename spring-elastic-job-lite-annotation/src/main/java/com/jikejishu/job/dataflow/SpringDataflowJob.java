@@ -20,12 +20,14 @@
  * </p>
  */
 
-package com.jikeh.elasticjob.lite.job.dataflow;
+package com.jikejishu.job.dataflow;
 
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.dataflow.DataflowJob;
-import com.jikeh.elasticjob.lite.fixture.entity.Foo;
-import com.jikeh.elasticjob.lite.fixture.repository.FooRepository;
+import com.jikejishu.annotation.ElasticDataflowJob;
+import com.jikejishu.model.Foo;
+import com.jikejishu.service.FooRepository;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
@@ -40,6 +42,8 @@ import java.util.List;
  * 如果采用流式作业处理方式，建议processData处理数据后更新其状态，避免fetchData再次抓取到，从而使得作业永不停止。
  * 流式数据处理参照TbSchedule设计，适用于不间歇的数据处理。
  */
+@ElasticDataflowJob(cron = "0/5 * * * * ?", shardingTotalCount=2, shardingItemParameters="0=Guangzhou,1=HangZhou")
+@Component
 public class SpringDataflowJob implements DataflowJob<Foo> {
     
     @Resource
@@ -70,8 +74,8 @@ public class SpringDataflowJob implements DataflowJob<Foo> {
         System.out.println(String.format("Item: %s | Time: %s | Thread: %s | %s",
                 shardingContext.getShardingItem(), new SimpleDateFormat("HH:mm:ss").format(new Date()), Thread.currentThread().getId(), "DATAFLOW PROCESS"));
         for (Foo each : data) {
-            fooRepository.setCompleted(each.getId());
             System.out.println(String.format("Item: %s | data: %s ", shardingContext.getShardingItem(), each));
+            fooRepository.setCompleted(each.getId());
         }
     }
 }
