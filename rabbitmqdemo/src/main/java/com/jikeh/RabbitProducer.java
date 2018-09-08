@@ -8,6 +8,11 @@ import com.rabbitmq.client.MessageProperties;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * 更多资料分享下载，请关注：
+ * 极客慧：http://www.jikeh.cn
+ *  QQ群：375412858
+ */
 public class RabbitProducer {
 
     private static final String EXCHANGE_NAME = "exchange_demo";

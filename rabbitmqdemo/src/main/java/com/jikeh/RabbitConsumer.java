@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * 更多资料分享下载，请关注：
+ * 极客慧：http://www.jikeh.cn
+ *  QQ群：375412858
+ */
 public class RabbitConsumer {
 
     private static final String QUUE_NAME = "queue_demo";
