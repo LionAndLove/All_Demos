@@ -34,7 +34,10 @@ public class CircuitBreakerTest {
 //		testCircuitBreaker();
 
 		//测试资源池被占满的情况：
-		testResourceIsFull();
+//		testResourceIsFull();
+
+		//测试timeout机制引起的降级
+		testTimeout();
 
 	}
 
@@ -119,6 +122,14 @@ public class CircuitBreakerTest {
 			System.out.println("第" + (index + 1) + "次请求，结果为：" + response);
 		}
 
+	}
+
+	/**
+	 * 测试执行超时引起的降级策略：
+	 *
+	 */
+	private static void testTimeout(){
+		String response = HttpClientUtils.sendGetRequest("http://localhost:8022/get/ad?adId=-2");
 	}
 	
 }

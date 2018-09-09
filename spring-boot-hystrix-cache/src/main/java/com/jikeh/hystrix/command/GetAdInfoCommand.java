@@ -49,7 +49,7 @@ public class GetAdInfoCommand extends HystrixCommand<AdInfo> {
 						.withCircuitBreakerSleepWindowInMilliseconds(6000)
 
 						//默认执行超时时间是1s
-						.withExecutionTimeoutInMilliseconds(200000))
+						.withExecutionTimeoutInMilliseconds(500))
 		);
 		this.adId = adId;
 	}
