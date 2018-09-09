@@ -5,8 +5,12 @@
 
 package com.jikeh;
 
+import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.annotation.Bean;
 
 /**
  * 更多免费资料，更多高清内容，更多java技术，欢迎访问网站
@@ -18,6 +22,13 @@ public class SpringBootMain {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootMain.class, args);
+    }
+
+    @Bean
+    public ServletRegistrationBean indexServletRegistration() {
+        ServletRegistrationBean registration = new ServletRegistrationBean(new HystrixMetricsStreamServlet());
+        registration.addUrlMappings("/hystrix.stream");
+        return registration;
     }
 
 }
