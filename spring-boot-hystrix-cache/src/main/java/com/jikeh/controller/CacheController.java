@@ -27,6 +27,10 @@ import java.util.concurrent.Future;
  *
  * 	http://localhost:8022/get/ads?adIds=1,1,3,3,5,5 是否读取缓存测试
  *
+ * 	结合hystrix-dashboard进行测试：效果可能会更好
+ * 	http://localhost:8080/hystrix-dashboard/
+ * 	http://localhost:8022/hystrix.stream
+ *
  * @author 极客慧 www.jikeh.cn
  *
  */
