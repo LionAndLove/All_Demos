@@ -3,7 +3,9 @@ package com.jikeh;
 import com.jikeh.http.HttpClientUtils;
 
 /**
- * 断路器测试：
+ * 熔断器测试：无非就掌握三种状态的转换(open——half——open)
+ * 	工作原理：在滑动时间窗口内(10s)，到达熔断器的流量达到一定值(20)，且在该时间窗口内的错误比例达到一定值(50%)，熔断器打开(open)
+ * 	从open开始，再过一定时间(5s)，熔断器处于half-open状态，此时允许某个请求过去，如果请求正常，则熔断器关闭(close)
  *
  * @author 极客慧 www.jikeh.cn
  *
@@ -22,9 +24,6 @@ public class CircuitBreakerTest {
 	 * 	3、经过一段时间，断路器 half-open
 	 *
 	 * 	4、再后面3次请求，断路器 close
-	 *
-	 *
-	 *
 	 *
 	 * @param args
 	 * @throws Exception

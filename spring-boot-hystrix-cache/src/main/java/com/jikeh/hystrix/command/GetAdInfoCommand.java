@@ -28,16 +28,21 @@ public class GetAdInfoCommand extends HystrixCommand<AdInfo> {
 						.withQueueSizeRejectionThreshold(10))
 				.andCommandPropertiesDefaults(HystrixCommandProperties.Setter()
 						.withFallbackIsolationSemaphoreMaxConcurrentRequests(15)
+
 						//默认滑动窗口大小：10，注意这里设置的窗口大小一定要 >= withCircuitBreakerRequestVolumeThreshold，否则断路器始终open不了
 						.withMetricsRollingStatisticalWindowBuckets(2)
+
 						//默认滑动窗口时间窗：10s
 						.withMetricsRollingStatisticalWindowInMilliseconds(6000)
-						//滑动窗口时间窗内，经过短路器的流量超过了一定的阈值，才执行短路，注意是滑动窗口内
-						//4s时间内经过断路器的流量 >= 2，且错误比例>40%，断路器状态才会被打开
+
+						//滑动窗口时间窗内，经过短路器的流量超过了一定的阈值(默认20个)，才执行短路，注意是滑动窗口时间窗内
+						//4s时间内经过断路器的流量 >= 2
 						.withCircuitBreakerRequestVolumeThreshold(2)
+
 						//断路器统计到的异常调用的占比超过了一定的阈值，才执行短路，默认是50%
 						.withCircuitBreakerErrorThresholdPercentage(40)
-						//half-open状态：试探服务
+
+						//默认是5s，half-open状态：试探服务
 						.withCircuitBreakerSleepWindowInMilliseconds(6000))
 		);
 		this.adId = adId;
