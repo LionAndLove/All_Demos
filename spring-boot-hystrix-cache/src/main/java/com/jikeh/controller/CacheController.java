@@ -25,6 +25,8 @@ import java.util.concurrent.Future;
  * 背景：nginx开始，各级缓存都失效了，nginx发送很多的请求直接到缓存服务来获取最原始的数据
  * 	可能对系统的冲击比较大，为了避免冲垮整个广告系统，我们对于这个服务我们使用hystrix的线程池隔离技术
  *
+ * 	http://localhost:8022/get/ads?adIds=1,1,3,3,5,5 是否读取缓存测试
+ *
  * @author 极客慧 www.jikeh.cn
  *
  */
@@ -97,31 +99,14 @@ public class CacheController {
 	 */
 	public List<AdInfo> getAdInfos(String adIds) {
 
-		HystrixObservableCommand<AdInfo> getAdInfosCommand = new GetAdInfosCommand(adIds.split(","));
-		Observable<AdInfo> observable = getAdInfosCommand.observe();
-
-		//异步获取执行：
-		observable.subscribe(new Observer<AdInfo>() {
-
-			public void onCompleted() {
-				System.out.println("获取完了所有的广告数据");
-			}
-
-			public void onError(Throwable e) {
-				e.printStackTrace();
-			}
-
-			public void onNext(AdInfo adInfo) {
-				System.out.println(JSONObject.toJSONString(adInfo));
-			}
-
-		});
-
-		//同步获取执行结果：我们一次查询，肯定是返回结果集的组合
 		List<AdInfo> ads = new ArrayList<>();
-		Iterator<AdInfo> iterator = observable.toBlocking().getIterator();
-		while(iterator.hasNext()) {
-			ads.add(iterator.next());
+
+		for(String adId : adIds.split(",")) {
+			GetAdInfoCommand getAdInfoCommand = new GetAdInfoCommand(
+					Long.valueOf(adId));
+			AdInfo adInfo = getAdInfoCommand.execute();
+			ads.add(adInfo);
+			System.out.println("是否读取缓存："+getAdInfoCommand.isResponseFromCache());
 		}
 
 		return new ArrayList<>(ads);

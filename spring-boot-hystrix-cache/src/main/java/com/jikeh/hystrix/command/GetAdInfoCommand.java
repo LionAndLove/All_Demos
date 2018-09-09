@@ -22,9 +22,15 @@ public class GetAdInfoCommand extends HystrixCommand<AdInfo> {
 	
 	@Override
 	protected AdInfo run() {
-		String url = "http://127.0.0.1:1111/getAdInfo?adId=" + adId;
+		String url = "http://127.0.0.1:8011/getAdInfo?adId=" + adId;
 		String response = HttpClientUtils.sendGetRequest(url);
+		System.out.println("调用接口，查询广告数据，adId=" + adId);
 		return JSONObject.parseObject(response, AdInfo.class);
+	}
+
+	@Override
+	protected String getCacheKey() {
+		return "ad_info_" + adId;
 	}
 
 }

@@ -5,6 +5,7 @@
 
 package com.jikeh;
 
+import com.jikeh.filter.HystrixRequestContextFilter;
 import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,6 +30,14 @@ public class SpringBootMain {
         ServletRegistrationBean registration = new ServletRegistrationBean(new HystrixMetricsStreamServlet());
         registration.addUrlMappings("/hystrix.stream");
         return registration;
+    }
+
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(
+                new HystrixRequestContextFilter());
+        filterRegistrationBean.addUrlPatterns("/*");
+        return filterRegistrationBean;
     }
 
 }

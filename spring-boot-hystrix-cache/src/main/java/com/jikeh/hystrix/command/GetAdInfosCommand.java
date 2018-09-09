@@ -36,7 +36,7 @@ public class GetAdInfosCommand extends HystrixObservableCommand<AdInfo> {
 			public void call(Subscriber<? super AdInfo> observer) {
 				try {
 					for(String adId : adIds) {
-						String url = "http://127.0.0.1:1111/getAdInfo?adId=" + adId;
+						String url = "http://127.0.0.1:8011/getAdInfo?adId=" + adId;
 						String response = HttpClientUtils.sendGetRequest(url);
 						AdInfo adInfo = JSONObject.parseObject(response, AdInfo.class);
 						observer.onNext(adInfo);
