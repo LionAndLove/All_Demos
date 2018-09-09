@@ -74,10 +74,10 @@ public class CacheController {
 	 */
 	private AdInfo getAdfo(Long adId) {
 
-		HystrixCommand<AdInfo> getProductInfoCommand = new GetAdInfoCommand(adId);
+		HystrixCommand<AdInfo> getAdInfoCommand = new GetAdInfoCommand(adId);
 
 		//同步获取执行结果：
-		AdInfo adInfo = getProductInfoCommand.execute();
+		AdInfo adInfo = getAdInfoCommand.execute();
 
 		//异步获取执行结果
 //		Future<AdInfo> future = getProductInfoCommand.queue();
