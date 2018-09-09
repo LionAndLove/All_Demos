@@ -28,11 +28,25 @@ public class CircuitBreakerTest {
 	 * @param args
 	 * @throws Exception
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws InterruptedException {
+
+		//测试熔断器原理：
+//		testCircuitBreaker();
+
+		//测试资源池被占满的情况：
+		testResourceIsFull();
+
+	}
+
+	/**
+	 * 测试熔断器原理：
+	 *
+	 */
+	private static void testCircuitBreaker() throws InterruptedException {
 
 		for(int i = 0; i < 10; i++) {
 			String response = HttpClientUtils.sendGetRequest("http://localhost:8022/get/ad?adId=1");
-			System.out.println("第" + (i + 1) + "次请求，结果为：" + response);  
+			System.out.println("第" + (i + 1) + "次请求，结果为：" + response);
 		}
 
 		Long start = System.currentTimeMillis();
@@ -73,8 +87,38 @@ public class CircuitBreakerTest {
 
 		for(int i = 0; i < 3; i++) {
 			String response = HttpClientUtils.sendGetRequest("http://localhost:8022/get/ad?adId=1");
-			System.out.println("第" + (i + 1) + "次请求，结果为：" + response);  
+			System.out.println("第" + (i + 1) + "次请求，结果为：" + response);
 		}
+
+	}
+
+	/**
+	 * 测试资源线程池被占满了：
+	 * 	假设，一个线程池，大小是10个，队列大小是6个
+	 * 	 先进去线程池的是10个请求，然后有6个请求进入等待队列，线程池里有空闲，等待队列中的请求如果还没有timeout，那么就进去线程池去执行
+	 * 	 10 + 6 = 16个请求之外，2个请求，直接会被reject掉，限流，直接走fallback
+	 *
+	 */
+	private static void testResourceIsFull(){
+		for(int i = 0; i < 18; i++) {
+			new TestThread(i).start();
+		}
+	}
+
+	private static class TestThread extends Thread {
+
+		private int index;
+
+		public TestThread(int index) {
+			this.index = index;
+		}
+
+		@Override
+		public void run() {
+			String response = HttpClientUtils.sendGetRequest("http://localhost:8022/get/ad?adId=-2");
+			System.out.println("第" + (index + 1) + "次请求，结果为：" + response);
+		}
+
 	}
 	
 }

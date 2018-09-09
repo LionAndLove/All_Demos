@@ -7,6 +7,7 @@ import com.jikeh.model.AdInfo;
 import com.netflix.hystrix.*;
 
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 获取广告信息
@@ -16,16 +17,18 @@ import java.util.concurrent.TimeoutException;
 public class GetAdInfoCommand extends HystrixCommand<AdInfo> {
 
 	private Long adId;
-
-	private static int count = 1;
 	
 	public GetAdInfoCommand(Long adId) {
 		super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("GetAdInfoGroup"))
 				.andCommandKey(HystrixCommandKey.Factory.asKey("GetAdInfoCommand"))
 				.andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("GetAdInfoPool"))
 				.andThreadPoolPropertiesDefaults(HystrixThreadPoolProperties.Setter()
-						.withCoreSize(15)
-						.withQueueSizeRejectionThreshold(10))
+						.withCoreSize(10)//线程池大小
+						/**
+						 * 如果withMaxQueueSize<withQueueSizeRejectionThreshold，那么取的是withMaxQueueSize，反之，取得是withQueueSizeRejectionThreshold
+						 */
+						.withMaxQueueSize(6)//缓存队列大小：默认为-1，即 没有缓存队列
+						.withQueueSizeRejectionThreshold(8)) //阻塞队列大小：默认是5个
 				.andCommandPropertiesDefaults(HystrixCommandProperties.Setter()
 						.withFallbackIsolationSemaphoreMaxConcurrentRequests(15)
 
@@ -43,7 +46,10 @@ public class GetAdInfoCommand extends HystrixCommand<AdInfo> {
 						.withCircuitBreakerErrorThresholdPercentage(40)
 
 						//默认是5s，half-open状态：试探服务
-						.withCircuitBreakerSleepWindowInMilliseconds(6000))
+						.withCircuitBreakerSleepWindowInMilliseconds(6000)
+
+						//默认执行超时时间是1s
+						.withExecutionTimeoutInMilliseconds(200000))
 		);
 		this.adId = adId;
 	}
@@ -51,18 +57,14 @@ public class GetAdInfoCommand extends HystrixCommand<AdInfo> {
 	@Override
 	protected AdInfo run() throws Exception {
 
-		//如果断路器打开了，是打印不了这句话的
-		System.out.println("第"+count+"次调用接口，开始查询广告数据，adId=" + adId);
-		count++;
-
 		if(adId.equals(-1L)) {
 			// 如果调用失败了，报错了，那么就会去调用fallback降级机制
 			throw new Exception();
 		}
 
+		//主要观察一下缓存队列：
 		if(adId.equals(-2L)) {
-			// 如果执行时间超时，那么也会去调用fallback降级机制
-			throw new TimeoutException();
+			Thread.sleep(2000);
 		}
 
 		String url = "http://127.0.0.1:8011/getAdInfo?adId=" + adId;
