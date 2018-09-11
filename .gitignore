@@ -27,3 +27,6 @@
 /rabbitmq-base-demo/target
 /rabbitmq-base-demo/rabbitmq-base-demo.iml
 /rabbitmq-base-demo/.idea
+/spring-boot-demo-cache/spring-boot-demo-cache.iml
+/spring-boot-demo-cache/.idea
+/spring-boot-demo-cache/target
