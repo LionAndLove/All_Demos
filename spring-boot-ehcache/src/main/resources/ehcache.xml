@@ -14,7 +14,7 @@
 
     <!-- 测试 -->
     <cache
-            name="users"
+            name="ads"
             maxEntriesLocalHeap="10000"
             overflowToDisk="false"
             diskPersistent="false"
