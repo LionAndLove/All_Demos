@@ -33,3 +33,6 @@
 /spring-boot-ehcache/target
 /spring-boot-ehcache/spring-boot-ehcache.iml
 /spring-boot-ehcache/.idea
+/spring-boot-kafka/spring-boot-kafka.iml
+/spring-boot-kafka/.idea
+/spring-boot-kafka/target
