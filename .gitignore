@@ -36,3 +36,6 @@
 /spring-boot-kafka/spring-boot-kafka.iml
 /spring-boot-kafka/.idea
 /spring-boot-kafka/target
+/spring-boot-ehcache-redis/spring-boot-ehcache-redis.iml
+/spring-boot-ehcache-redis/.idea
+/spring-boot-ehcache-redis/target
