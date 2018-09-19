@@ -38,4 +38,29 @@ public class MybatisTests {
         System.out.println(JSONObject.toJSONString(ad));
     }
 
+    @Test
+    public void testInsert() {
+        Ad ad = new Ad();
+        ad.setName("缓存穿透、缓存雪崩初探-redis+ehcache+mybatis缓存架构测试");
+        ad.setDestinationUrl("https://www.toutiao.com/i6602586317362561544/");
+        ad.setImgUrl("http://p1.pstatp.com/large/pgc-image/15372844054148ce4c8be55");
+        System.out.println(getSqlSession().getMapper(AdMapper.class).insert(ad));
+    }
+
+    @Test
+    public void updateById() {
+        Ad ad = new Ad();
+        ad.setId(3L);
+        ad.setName("缓存架构之SpringBoot集成redis并结合ehcache实现二级缓存架构\n");
+        ad.setDestinationUrl("https://www.toutiao.com/i6602245004314280451/");
+        ad.setImgUrl("http://p3.pstatp.com/large/pgc-image/15372047674175e7582d1aa");
+        System.out.println(getSqlSession().getMapper(AdMapper.class).updateById(ad));
+    }
+
+    @Test
+    public void deleteById() {
+        System.out.println(getSqlSession().getMapper(AdMapper.class).deleteById(1L));
+    }
+
+
 }
