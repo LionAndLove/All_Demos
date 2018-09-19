@@ -54,7 +54,7 @@ public class AdController {
         } else {
             //如果 id 存在，就是修改数据，把原有的数据查询出来
             ad = adService.findById(id);
-            mv.addObject("admsg", "修改用户");
+            mv.addObject("admsg", "修改广告");
         }
         mv.addObject("model", ad);
         return mv;
