@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8">
+    <title>广告管理系统</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
+                <a class="text-muted" href="#"></a>
+            </div>
+            <div class="col-4 text-center">
+                <a class="blog-header-logo text-dark" href="#">广告管理系统</a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+        <a class="navbar-brand" href="#">首页</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample09">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">广告管理 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">权限管理</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="mt-2">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">广告名称</th>
+                <th scope="col">落地页</th>
+                <th scope="col">图片地址</th>
+                <th scope="col"> 操作  [<a href="${request.contextPath}/ads/add">新增</a>]</th>
+            </tr>
+            </thead>
+            <tbody>
+            <#list ads as ad>
+                <tr id="ad-${ad.id}">
+                    <td><a href="${ad.destinationUrl}">${ad.name}</a></td>
+                    <td>${ad.destinationUrl}</td>
+                    <td>${ad.imgUrl}</td>
+                    <td>
+                        [<a href="${request.contextPath}/ads/add?id=${ad.id}">编辑</a>]
+                        [<a href="javascript:;" onclick="deleteById(${ad.id}, '${ad.name}')">删除</a>]
+                    </td>
+                </tr>
+            </#list>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function deleteById(id, label){
+        var r = confirm('您确定要删除“' + label + '”吗？');
+        if(r){
+            $.ajax({
+                url: '${request.contextPath}/ads/delete',
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                type: 'POST',
+                success: function(data){
+                    if(data.success){
+                        $('#ad-' + id).remove();
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            })
+        }
+    }
+</script>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

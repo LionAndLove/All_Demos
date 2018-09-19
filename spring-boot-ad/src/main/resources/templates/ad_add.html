@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8">
+    <title>${admsg}</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+
+    <header class="blog-header py-3 bg-light">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
+                <a class="text-muted" href="#"></a>
+            </div>
+            <div class="col-4 text-center">
+                <a class="blog-header-logo text-dark" href="#">${admsg!}</a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+
+            </div>
+        </div>
+    </header>
+
+    <form action="${request.contextPath}/ads/add" method="post">
+
+        <input type="hidden" name="id" value="${model.id!}">
+
+        <div class="form-group">
+            <label for="name" class="col-form-label">广告名称：</label>
+            <input type="text" class="form-control" id="name" name="name" required value="${model.name!}">
+        </div>
+        <div class="form-group">
+            <label for="destination_url" class="col-form-label">落地页：</label>
+            <input type="phone" class="form-control" id="destination_url" name="destinationUrl" required value="${model.destinationUrl!}">
+        </div>
+        <div class="form-group">
+            <label for="img_url" class="col-form-label">图片地址：</label>
+            <input type="phone" class="form-control" id="img_url" name="imgUrl" required value="${model.imgUrl!}">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">保存</button>
+            <button type="button" class="btn btn-secondary" onclick="backToList()">取消</button>
+        </div>
+
+        <div>${msg!}</div>
+
+    </form>
+</div>
+<script>
+    function backToList(){
+        location.href = '${request.contextPath}/ads';
+    }
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

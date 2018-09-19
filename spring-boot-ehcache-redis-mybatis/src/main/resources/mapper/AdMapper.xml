@@ -7,32 +7,4 @@
 		select * from ad where id = #{id}
 	</select>
 
-	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
-		insert into ad(name, destination_url, img_url)
-		values (#{name}, #{destinationUrl}, #{imgUrl})
-	</insert>
-
-	<update id="updateById">
-		update ad
-		<set>
-			<if test="name != null and name != ''">
-				name = #{name},
-			</if>
-			<if test="destinationUrl != null and destinationUrl != ''">
-				destination_url = #{destinationUrl},
-			</if>
-			<if test="imgUrl != null and imgUrl != ''">
-				img_url = #{imgUrl},
-			</if>
-			id = #{id},
-		</set>
-		<where>
-			id = #{id}
-		</where>
-	</update>
-
-	<delete id="deleteById">
-		delete from ad where id = #{id}
-	</delete>
-
 </mapper>
