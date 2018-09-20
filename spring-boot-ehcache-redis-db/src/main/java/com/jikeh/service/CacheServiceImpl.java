@@ -21,7 +21,7 @@ public class CacheServiceImpl {
     @Cacheable(value = "ads", key = "#p0", unless="#result == null")
     public String getAd(Long adId){
         //首次调用，才会打印这句话; 在缓存有效时间内，接下来的调用就不会再打印这句话了;
-        System.out.printf("没有执行缓存\n");
+        System.out.printf("没有调用本地缓存\n");
         return getAdFromRedis(adId);
     }
 
