@@ -45,3 +45,6 @@
 /spring-boot-ad/spring-boot-ad.iml
 /spring-boot-ad/.idea
 /spring-boot-ad/target
+/spring-boot-ehcache-redis-db/spring-boot-ehcache-redis-db.iml
+/spring-boot-ehcache-redis-db/.idea
+/spring-boot-ehcache-redis-db/target
