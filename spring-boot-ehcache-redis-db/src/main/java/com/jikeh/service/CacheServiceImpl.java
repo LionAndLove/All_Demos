@@ -45,7 +45,7 @@ public class CacheServiceImpl {
             res = JSONObject.toJSONString(ad);
 
             //刷入数据到redis：
-            manager.setStr(key, res);
+            manager.setStrWithExpire(key, res, 24*3600);
         }
         return res;
     }

@@ -48,3 +48,6 @@
 /spring-boot-ehcache-redis-db/spring-boot-ehcache-redis-db.iml
 /spring-boot-ehcache-redis-db/.idea
 /spring-boot-ehcache-redis-db/target
+/spring-boot-redis-elastic-job/spring-boot-redis-elastic-job.iml
+/spring-boot-redis-elastic-job/.idea
+/spring-boot-redis-elastic-job/target

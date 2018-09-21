@@ -24,6 +24,11 @@ public class AdServiceImpl implements AdService {
 	}
 
 	@Override
+	public List<Ad> getAds() {
+		return adMapper.selectAll();
+	}
+
+	@Override
 	public Ad findById(Long id) {
 		return adMapper.selectByPrimaryKey(id);
 	}

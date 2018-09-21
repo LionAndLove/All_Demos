@@ -20,6 +20,10 @@
 		order by id
 	</select>
 
+	<select id="selectAll" resultType="Ad">
+		select * from ad
+	</select>
+
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		insert into ad(name, destination_url, img_url)
 		values (#{name}, #{destinationUrl}, #{imgUrl})

@@ -10,6 +10,8 @@ public interface AdService {
 
 	Ad findById(Long id);
 
+	List<Ad> getAds();
+
 	boolean saveOrUpdate(Ad ad);
 
 	boolean deleteById(Long id);

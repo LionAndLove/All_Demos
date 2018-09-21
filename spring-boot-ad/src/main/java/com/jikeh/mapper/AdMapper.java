@@ -27,6 +27,13 @@ public interface AdMapper {
     List<Ad> selectByAd(Ad ad, RowBounds rowBounds);
 
     /**
+     * 查询全部数据
+     *
+     * @return
+     */
+    List<Ad> selectAll();
+
+    /**
      * 新增
      *
      * @param ad

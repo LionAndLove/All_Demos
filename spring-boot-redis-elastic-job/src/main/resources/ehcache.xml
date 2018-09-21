@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd">
+    <!-- 默认缓存策略 -->
+    <defaultCache
+            maxEntriesLocalHeap="10000"
+            overflowToDisk="false"
+            diskPersistent="false"
+            timeToIdleSeconds="0"
+            timeToLiveSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+
+    </defaultCache>
+
+    <!-- 测试 -->
+    <cache
+            name="ads"
+            maxEntriesLocalHeap="10000"
+            overflowToDisk="false"
+            diskPersistent="false"
+            timeToIdleSeconds="0"
+            timeToLiveSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+    </cache>
+</ehcache>
