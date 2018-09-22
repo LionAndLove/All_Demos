@@ -51,3 +51,6 @@
 /spring-boot-redis-elastic-job/spring-boot-redis-elastic-job.iml
 /spring-boot-redis-elastic-job/.idea
 /spring-boot-redis-elastic-job/target
+/spring-boot-rabbitmq/spring-boot-rabbitmq.iml
+/spring-boot-rabbitmq/.idea
+/spring-boot-rabbitmq/target
