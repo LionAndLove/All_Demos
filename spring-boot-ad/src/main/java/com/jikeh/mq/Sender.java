@@ -49,6 +49,8 @@ public class Sender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.Re
 			 * 这块知识，我们后期讲"分布式事务"的时候，在深入讲解这块内容
 			 */
 			emailLogger.error("send ack fail, cause = {}, correlationData = {}", cause, correlationData.getId());
+			String str = correlationData.getId();
+			retrySend(str, 3);
 		} else {
 			System.out.println("send ack success");
 		}
@@ -67,15 +69,20 @@ public class Sender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.Re
 	public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
 		emailLogger.error("send fail return-message = " + new String(message.getBody()) + ", replyCode: " + replyCode + ", replyText: " + replyText + ", exchange: " + exchange + ", routingKey: " + routingKey);
 		String str = new String(message.getBody());
-		if(map.containsKey(str)){
-			int count = map.get(str);
+		retrySend(str, 3);
+	}
+
+	private void retrySend(String content, int retryTime){
+		if(map.containsKey(content)){
+			int count = map.get(content);
 			count++;
-			map.put(str, count);
+			map.put(content, count);
 		} else {
-			map.put(str, 1);
+			map.put(content, 1);
 		}
-		if(map.get(str) <= 3) {
-			send(RabbitConfig.queueName, str);
+		if(map.get(content) <= retryTime) {
+			send(RabbitConfig.queueName, content);
 		}
 	}
+
 }
