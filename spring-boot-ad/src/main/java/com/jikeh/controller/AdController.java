@@ -2,6 +2,7 @@ package com.jikeh.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jikeh.model.Ad;
+import com.jikeh.model.AdMessage;
 import com.jikeh.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,8 +70,19 @@ public class AdController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public ModelAndView save(Ad ad) {
         ModelAndView mv = new ModelAndView();
+        int operation;
+        if(ad.getId() == null){
+            operation = 1;
+        } else {
+            operation = 2;
+        }
         try {
-            adService.saveOrUpdate(ad);
+            if(adService.saveOrUpdate(ad)){
+                AdMessage adMessage = new AdMessage();
+                adMessage.setId(ad.getId());
+                adMessage.setOperation(operation);
+                adService.sendMq(JSONObject.toJSONString(adMessage));
+            }
             mv.setViewName("redirect:/ads");
         } catch (Exception e){
             mv.setViewName("ad_add");

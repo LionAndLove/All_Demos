@@ -15,4 +15,7 @@ public interface AdService {
 	boolean saveOrUpdate(Ad ad);
 
 	boolean deleteById(Long id);
+
+	void sendMq(String content);
+
 }
