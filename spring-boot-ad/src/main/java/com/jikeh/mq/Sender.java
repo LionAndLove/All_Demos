@@ -33,6 +33,7 @@ public class Sender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.Re
 	public void confirm(CorrelationData correlationData, boolean ack, String cause) {
 		if (!ack) {
 			System.out.println("send ack fail, cause = " + cause);
+			// TODO: 2018/9/23 0023 虽然打印出了错误信息，但是我们并不知道是哪条消息出了问题，后续我们这里需要改进下
 			emailLogger.error("send ack fail, cause = " + cause);
 		} else {
 			System.out.println("send ack success");

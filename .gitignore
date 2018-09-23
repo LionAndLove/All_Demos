@@ -59,3 +59,4 @@
 /spring-boot-rabbitmq-reliability/target
 /spring-boot-rabbitmq-reliability-redis/spring-boot-rabbitmq-reliability-redis.iml
 /spring-boot-rabbitmq-reliability-redis/.idea
+/spring-boot-rabbitmq-reliability-redis/target
