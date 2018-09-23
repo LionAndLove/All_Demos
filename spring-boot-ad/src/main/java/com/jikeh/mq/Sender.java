@@ -25,7 +25,7 @@ public class Sender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.Re
 		this.rabbitTemplate.setMandatory(true);
 		this.rabbitTemplate.setConfirmCallback(this);
 		this.rabbitTemplate.setReturnCallback(this);
-		this.rabbitTemplate.setRoutingKey("fail-queue");
+		this.rabbitTemplate.setRoutingKey(routingKey);
 
 		//这样我们就能知道，发送失败的是哪条消息了
 		this.rabbitTemplate.correlationConvertAndSend(content, new CorrelationData(content));
@@ -49,8 +49,6 @@ public class Sender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.Re
 			 * 这块知识，我们后期讲"分布式事务"的时候，在深入讲解这块内容
 			 */
 			emailLogger.error("send ack fail, cause = {}, correlationData = {}", cause, correlationData.getId());
-			String str = correlationData.getId();
-			retrySend(str, 3);
 		} else {
 			System.out.println("send ack success");
 		}
