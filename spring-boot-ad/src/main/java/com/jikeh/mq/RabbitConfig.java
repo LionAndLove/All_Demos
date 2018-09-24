@@ -48,6 +48,15 @@ public class RabbitConfig {
      */
     public static final String MESSAGE_TTL = "x-message-ttl";
 
+    /**
+     * 正常消费队列：必须显性声明
+     */
+    @Bean
+    public Queue adQueue() {
+        Queue queue = new Queue(queueName, true);
+        return queue;
+    }
+
     //建立过期队列与死信队列的关系：当过期队列过期了之后，自动进入死信队列
     @Bean
     public Queue ttlQueue() {
