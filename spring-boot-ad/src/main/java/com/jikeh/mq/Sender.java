@@ -14,8 +14,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class Sender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnCallback{
 
-	private static Map<String, Integer> map = new ConcurrentHashMap<>();
-
 	private final Logger emailLogger = LoggerFactory.getLogger("emailLogger");
 
 	@Autowired
@@ -49,6 +47,9 @@ public class Sender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.Re
 			 * 这块知识，我们后期讲"分布式事务"的时候，在深入讲解这块内容
 			 */
 			emailLogger.error("send ack fail, cause = {}, correlationData = {}", cause, correlationData.getId());
+
+			//将异常信息发送到一个过期队列：
+			send(RabbitConfig.queueTtlName, correlationData.getId());
 		} else {
 			System.out.println("send ack success");
 		}
@@ -67,20 +68,7 @@ public class Sender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.Re
 	public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
 		emailLogger.error("send fail return-message = " + new String(message.getBody()) + ", replyCode: " + replyCode + ", replyText: " + replyText + ", exchange: " + exchange + ", routingKey: " + routingKey);
 		String str = new String(message.getBody());
-		retrySend(str, 3);
-	}
-
-	private void retrySend(String content, int retryTime){
-		if(map.containsKey(content)){
-			int count = map.get(content);
-			count++;
-			map.put(content, count);
-		} else {
-			map.put(content, 1);
-		}
-		if(map.get(content) <= retryTime) {
-			send(RabbitConfig.queueName, content);
-		}
+		send(RabbitConfig.queueTtlName, str);
 	}
 
 }
