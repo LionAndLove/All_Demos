@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -25,6 +26,9 @@ public class Receiver {
 
     @Resource
     UpdateRedisServiceImpl updateRedisService;
+
+    @Autowired
+    private Sender sender;
 
     @RabbitHandler
     public void process(String content, Channel channel, Message message) {
@@ -41,9 +45,10 @@ public class Receiver {
                 //更新redis数据：
                 if(!updateRedisService.updateRedis(id)){
                     retryTimes++;
+                }else {
+                    break;
                 }
             }
-            break;
         }
 
         if (retryTimes >= 3) {
@@ -53,8 +58,11 @@ public class Receiver {
 
         try {
             if (retryTimes >= 5) {
-                //当有很多次更新失败的时候，丢弃这条消息或者发送到死信队列中
-                channel.basicNack(message.getMessageProperties().getDeliveryTag(), false,false);
+                //当有很多次更新失败的时候，将其放入缓存队列，等待延迟消费：
+                sender.send(RabbitConfig.queueTtlName, content);
+
+                //既然已经重新发送了，也算一种正常消费了
+                channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
             }else {
                 //告诉服务器收到这条消息 已经被我消费了 可以在队列删掉；否则消息服务器以为这条消息没处理掉 后续还会在发
                 channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
