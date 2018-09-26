@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 @Component
 @RabbitListener(queues = RabbitConfig.queueName)
@@ -37,6 +38,19 @@ public class Receiver {
 
         AdMessage adMessage = JSON.parseObject(content, AdMessage.class);
         Long id = adMessage.getId();
+        String uuid = adMessage.getUuidKey();
+        if(updateRedisService.isExist(uuid)){
+            //重复消息直接丢弃
+            try {
+                channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                logger.info("handle msg finished = {}", content);
+                return;
+            }
+        }
+        updateRedisService.setUuid(uuid);
 
         int retryTimes = 0;
         while (retryTimes < 5) {

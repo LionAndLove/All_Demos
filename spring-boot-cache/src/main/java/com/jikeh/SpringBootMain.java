@@ -5,9 +5,13 @@
 
 package com.jikeh;
 
+import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.UUID;
 
 /**
  * 更多免费资料，更多高清内容，更多java技术，欢迎访问网站

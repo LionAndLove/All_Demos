@@ -12,6 +12,11 @@ public class AdMessage {
 	 */
 	private Long id;
 
+    /**
+     * 消息的唯一key：用于消息去重
+     */
+	private String uuidKey;
+
     public int getOperation() {
         return operation;
     }
@@ -26,5 +31,13 @@ public class AdMessage {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUuidKey() {
+        return uuidKey;
+    }
+
+    public void setUuidKey(String uuidKey) {
+        this.uuidKey = uuidKey;
     }
 }

@@ -38,4 +38,20 @@ public class UpdateRedisServiceImpl {
         return res;
     }
 
+    /**
+     * 分布式存储UUID：
+     *
+     * @param uuid
+     * @return
+     */
+    public boolean setUuid(String uuid){
+        RedisManager manager = RedisManager.getInstance();
+        return manager.setStrWithExpire(uuid, "1", 1);
+    }
+
+    public boolean isExist(String key){
+        RedisManager manager = RedisManager.getInstance();
+        return manager.exists(key);
+    }
+
 }

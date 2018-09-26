@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/ads")
@@ -81,6 +82,7 @@ public class AdController {
                 AdMessage adMessage = new AdMessage();
                 adMessage.setId(ad.getId());
                 adMessage.setOperation(operation);
+                adMessage.setUuidKey(UUID.randomUUID().toString());
                 adService.sendMq(JSONObject.toJSONString(adMessage));
             }
             mv.setViewName("redirect:/ads");
