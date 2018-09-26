@@ -60,3 +60,6 @@
 /spring-boot-rabbitmq-reliability-redis/spring-boot-rabbitmq-reliability-redis.iml
 /spring-boot-rabbitmq-reliability-redis/.idea
 /spring-boot-rabbitmq-reliability-redis/target
+/spring-boot-cache/spring-boot-cache.iml
+/spring-boot-cache/.idea
+/spring-boot-cache/target
