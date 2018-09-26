@@ -15,9 +15,8 @@ public class UpdateRedisServiceImpl {
 
     private Logger logger = LoggerFactory.getLogger(UpdateRedisServiceImpl.class);
 
-    public boolean updateRedis(Long adId){
+    public boolean updateRedis(Long adId, String adStr){
         RedisManager manager = RedisManager.getInstance();
-        String adStr = getAdFromDb(adId);
         if(StringUtils.isEmpty(adStr)){
             return false;
         }

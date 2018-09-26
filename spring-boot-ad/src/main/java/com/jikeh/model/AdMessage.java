@@ -17,6 +17,11 @@ public class AdMessage {
      */
 	private String uuidKey;
 
+    /**
+     * 广告信息：
+     */
+	private String content;
+
     public int getOperation() {
         return operation;
     }
@@ -39,5 +44,13 @@ public class AdMessage {
 
     public void setUuidKey(String uuidKey) {
         this.uuidKey = uuidKey;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

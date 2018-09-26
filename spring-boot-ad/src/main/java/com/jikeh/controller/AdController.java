@@ -83,6 +83,7 @@ public class AdController {
                 adMessage.setId(ad.getId());
                 adMessage.setOperation(operation);
                 adMessage.setUuidKey(UUID.randomUUID().toString());
+                adMessage.setContent(JSONObject.toJSONString(ad));
                 adService.sendMq(JSONObject.toJSONString(adMessage));
             }
             mv.setViewName("redirect:/ads");

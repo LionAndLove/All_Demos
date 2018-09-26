@@ -39,6 +39,7 @@ public class Receiver {
         AdMessage adMessage = JSON.parseObject(content, AdMessage.class);
         Long id = adMessage.getId();
         String uuid = adMessage.getUuidKey();
+        String adStr = adMessage.getContent();
         if(updateRedisService.isExist(uuid)){
             //重复消息直接丢弃
             try {
@@ -57,7 +58,7 @@ public class Receiver {
             //消费者做幂等处理(当然这只是对单台机器而言没有问题，如果是分布式集群环境，这种是不行的，后续我们会继续优化这块)：防止相同类型的广告id更新问题
             synchronized (AdLock.cacheLock) {
                 //更新redis数据：
-                if(!updateRedisService.updateRedis(id)){
+                if(!updateRedisService.updateRedis(id, adStr)){
                     retryTimes++;
                 }else {
                     break;
