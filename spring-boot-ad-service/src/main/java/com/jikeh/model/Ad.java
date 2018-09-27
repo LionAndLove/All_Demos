@@ -22,6 +22,9 @@ public class Ad extends SerializableDTO {
     @JSONField(name = "end_time")
     private Long endTime;
 
+    @JSONField(name = "update_time")
+    private String updateTime;
+
     public Long getId() {
         return id;
     }
@@ -76,5 +79,13 @@ public class Ad extends SerializableDTO {
 
     public void setEndTime(Long endTime) {
         this.endTime = endTime;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 }

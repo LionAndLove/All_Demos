@@ -41,7 +41,7 @@
 			<if test="imgUrl != null and imgUrl != ''">
 				img_url = #{imgUrl},
 			</if>
-			id = #{id},
+			id = #{id}, update_time = #{updateTime}
 		</set>
 		<where>
 			id = #{id}

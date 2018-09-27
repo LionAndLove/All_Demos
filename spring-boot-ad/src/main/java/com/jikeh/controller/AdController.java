@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Controller
 @RequestMapping("/ads")
 public class AdController {
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Autowired
     AdService adService;
@@ -70,6 +74,7 @@ public class AdController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public ModelAndView save(Ad ad) {
+        ad.setUpdateTime(sdf.format(new Date(System.currentTimeMillis())));
         ModelAndView mv = new ModelAndView();
         int operation;
         if(ad.getId() == null){

@@ -60,7 +60,7 @@ public class SpringSimpleJob implements SimpleJob {
         for(Ad ad : ads){
             String key = "ad_info_" + ad.getId();
             //刷入数据到redis：
-            manager.setStrWithExpire(key, JSONObject.toJSONString(ad), 24*3600);
+            manager.setStrWithExpire(key, JSONObject.toJSONString(ad), 1);
         }
 
     }
