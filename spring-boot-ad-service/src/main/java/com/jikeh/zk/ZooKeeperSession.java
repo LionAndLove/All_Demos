@@ -108,7 +108,7 @@ public class ZooKeeperSession {
 
 		try {
 			zookeeper.create(path, "".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
-			System.out.println("success to acquire lock for adId = " + adId);
+			logger.info("success to acquire lock for adId = " + adId);
 		} catch (Exception e) {
 			// 如果那个广告对应的锁node，已经存在了，就是已经被别人加锁了，那么就这里就会报错
 			// NodeExistsException
@@ -119,10 +119,10 @@ public class ZooKeeperSession {
 					zookeeper.create(path, "".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
 				} catch (Exception e2) {
 					count++;
-					System.out.println("the " + count + " times try to acquire lock for adId = " + adId + "......");
+					logger.info("the " + count + " times try to acquire lock for adId = " + adId);
 					continue;
 				}
-				System.out.println("success to acquire lock for adId = " + adId + " after " + count + " times try......");
+				logger.info("success to acquire lock for adId = " + adId + " after " + count + " times try......");
 				break;
 			}
 		}
@@ -137,7 +137,7 @@ public class ZooKeeperSession {
 		String path = "/ad-lock-" + adId;
 		try {
 			zookeeper.delete(path, -1);
-			System.out.println("release the lock for adId = " + adId + "]......");
+			logger.info("release the lock for adId = " + adId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
