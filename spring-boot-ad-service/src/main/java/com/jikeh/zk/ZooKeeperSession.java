@@ -20,7 +20,7 @@ import java.util.concurrent.CountDownLatch;
  */
 public class ZooKeeperSession {
 
-	private Logger logger = LoggerFactory.getLogger(ZooKeeperSession.class);
+	private static final Logger logger = LoggerFactory.getLogger(ZooKeeperSession.class);
 
 	private static CountDownLatch connectedSemaphore = new CountDownLatch(1);
 
@@ -141,6 +141,19 @@ public class ZooKeeperSession {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void main(String[] args) {
+		Long adId = 1L;
+		ZooKeeperSession zkSession = ZooKeeperSession.getInstance();
+		//1、获取锁：
+		zkSession.acquireDistributedLock(adId);
+
+		//2、执行一些修改共享资源的操作
+		logger.info("I am updating common resource！");
+
+		//3、释放锁
+		zkSession.releaseDistributedLock(adId);
 	}
 
 }
