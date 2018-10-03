@@ -6,9 +6,10 @@ import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.topology.base.BaseRichBolt;
 import org.apache.storm.tuple.Tuple;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class Sumbolt extends BaseRichBolt {
+public class WordCountbolt extends BaseRichBolt {
 
     private Map stormConf;
     private TopologyContext context;
@@ -21,15 +22,29 @@ public class Sumbolt extends BaseRichBolt {
         this.collector = collector;
     }
 
-    int sum = 0;
+    HashMap<String, Integer> hashMap = new HashMap<>();
     public void execute(Tuple input) {
-        //input.getInteger(0);
-        Integer value = input.getIntegerByField("num");
-        sum+=value;
-        System.out.println("sum:"+sum);
+
+        //获取每一个单词
+        String word = input.getStringByField("words");
+
+        //对所有的单词进行汇总
+        Integer value = hashMap.get(word);
+        if(value==null){
+            value = 0;
+        }
+
+        value++;
+        hashMap.put(word, value);
+
+        //将每次统计结果打印出来：
+        System.out.println("==================================");
+        for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
+            System.out.println(entry);
+        }
+
     }
 
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-
     }
 }

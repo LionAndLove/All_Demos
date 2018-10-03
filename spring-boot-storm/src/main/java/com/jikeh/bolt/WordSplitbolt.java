@@ -4,17 +4,17 @@ import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.topology.base.BaseRichBolt;
+import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
+import org.apache.storm.tuple.Values;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public class Countbolt extends BaseRichBolt {
+public class WordSplitbolt extends BaseRichBolt {
 
     private Map stormConf;
     private TopologyContext context;
     private OutputCollector collector;
-
     public void prepare(Map stormConf, TopologyContext context,
                         OutputCollector collector) {
         this.stormConf = stormConf;
@@ -22,29 +22,19 @@ public class Countbolt extends BaseRichBolt {
         this.collector = collector;
     }
 
-    HashMap<String, Integer> hashMap = new HashMap<>();
+
     public void execute(Tuple input) {
-
-        //获取每一个单词
-        String word = input.getStringByField("words");
-
-        //对所有的单词进行汇总
-        Integer value = hashMap.get(word);
-        if(value==null){
-            value = 0;
+        //获取每一行数据
+        String line= input.getStringByField("line");
+        //把数据切分成一个个的单词
+        String[] words = line.split(" ");
+        for (String word : words) {
+            //把每个单词都发射数据
+            this.collector.emit(new Values(word));
         }
-
-        value++;
-        hashMap.put(word, value);
-
-        //将每次统计结果打印出来：
-        System.out.println("==================================");
-        for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
-            System.out.println(entry);
-        }
-
     }
 
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
+        declarer.declare(new Fields("words"));
     }
 }

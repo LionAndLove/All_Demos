@@ -1,6 +1,6 @@
 package com.jikeh.Topology;
 
-import com.jikeh.bolt.Sumbolt;
+import com.jikeh.bolt.NumberSumbolt;
 import com.jikeh.spout.NumberSourceSpout;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
@@ -13,12 +13,12 @@ import org.apache.storm.topology.TopologyBuilder;
  * 极客慧：www.jikeh.cn
  * 如果你希望进一步深入交流，请加入我们的大家庭QQ群：375412858
  */
-public class SumTopology {
+public class NumberSumTopology {
 
     public static void main(String[] args) {
         TopologyBuilder topologyBuilder = new TopologyBuilder();
         topologyBuilder.setSpout("number_spout_id", new NumberSourceSpout());
-        topologyBuilder.setBolt("sum_bolt_id", new Sumbolt()).shuffleGrouping("spout_id");
+        topologyBuilder.setBolt("sum_bolt_id", new NumberSumbolt()).shuffleGrouping("number_spout_id");
 
         LocalCluster localCluster = new LocalCluster();
         localCluster.submitTopology("sum_topology", new Config(), topologyBuilder.createTopology());

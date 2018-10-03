@@ -1,7 +1,7 @@
 package com.jikeh.Topology;
 
-import com.jikeh.bolt.Countbolt;
-import com.jikeh.bolt.Splitbolt;
+import com.jikeh.bolt.WordCountbolt;
+import com.jikeh.bolt.WordSplitbolt;
 import com.jikeh.spout.WordSourceSpout;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
@@ -19,8 +19,8 @@ public class WordCountTopology {
     public static void main(String[] args) {
         TopologyBuilder topologyBuilder = new TopologyBuilder();
         topologyBuilder.setSpout("word_spout_id", new WordSourceSpout());
-        topologyBuilder.setBolt("split_bolt_id", new Splitbolt()).shuffleGrouping("word_spout_id");
-        topologyBuilder.setBolt("count_bolt_id", new Countbolt()).shuffleGrouping("split_bolt_id");
+        topologyBuilder.setBolt("split_bolt_id", new WordSplitbolt()).shuffleGrouping("word_spout_id");
+        topologyBuilder.setBolt("count_bolt_id", new WordCountbolt()).shuffleGrouping("split_bolt_id");
 
         LocalCluster localCluster = new LocalCluster();
         localCluster.submitTopology("topology", new Config(), topologyBuilder.createTopology());
