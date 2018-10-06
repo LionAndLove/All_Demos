@@ -76,3 +76,10 @@
 /spring-boot-storm/.idea
 /spring-boot-storm/target
 /spring-boot-storm/logs
+/spring-boot-kafka-group-consumer/spring-boot-kafka-group-consumer.iml
+/spring-boot-kafka-group-consumer/.idea
+/spring-boot-kafka-group-consumer/pom.xml
+/spring-boot-kafka-group-consumer/producer/target
+/spring-boot-kafka-group-consumer/producer/producer.iml
+/spring-boot-kafka-group-consumer/consumer/consumer.iml
+/spring-boot-kafka-group-consumer/consumer/target
