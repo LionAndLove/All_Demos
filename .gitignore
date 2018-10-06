@@ -83,3 +83,7 @@
 /spring-boot-kafka-group-consumer/producer/producer.iml
 /spring-boot-kafka-group-consumer/consumer/consumer.iml
 /spring-boot-kafka-group-consumer/consumer/target
+/spring-boot-kafka-group-consumer/consumer2/consumer2.iml
+/spring-boot-kafka-group-consumer/consumer2/target
+/spring-boot-kafka-group-consumer/consumer3/consumer3.iml
+/spring-boot-kafka-group-consumer/consumer3/target
