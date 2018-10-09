@@ -5,6 +5,7 @@ import com.jikeh.bolt.WordSplitbolt;
 import com.jikeh.spout.WordSourceSpout;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
+import org.apache.storm.StormSubmitter;
 import org.apache.storm.topology.TopologyBuilder;
 
 /**
@@ -22,8 +23,18 @@ public class WordCountTopology {
         topologyBuilder.setBolt("split_bolt_id", new WordSplitbolt()).shuffleGrouping("word_spout_id");
         topologyBuilder.setBolt("count_bolt_id", new WordCountbolt()).shuffleGrouping("split_bolt_id");
 
-        LocalCluster localCluster = new LocalCluster();
-        localCluster.submitTopology("topology", new Config(), topologyBuilder.createTopology());
+        // 代码提交到本地模式上运行：
+//        LocalCluster localCluster = new LocalCluster();
+//        localCluster.submitTopology("topology", new Config(), topologyBuilder.createTopology());
+
+        // 代码提交到Storm集群上运行：
+        String topoName = WordCountTopology.class.getSimpleName();
+        try {
+            StormSubmitter.submitTopology(topoName, new Config(), topologyBuilder.createTopology());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

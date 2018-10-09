@@ -35,7 +35,7 @@ public class WordSourceSpout extends BaseRichSpout {
      */
     public void nextTuple() {
         //读取指定目录下所有文件
-        Collection<File> files = FileUtils.listFiles(new File("D:\\storm_test"), new String[]{"txt"}, true);
+        Collection<File> files = FileUtils.listFiles(new File("/usr/local/src/storm_test"), new String[]{"txt"}, true);
         for (File file : files) {
             try {
                 //获取每个文件的所有数据

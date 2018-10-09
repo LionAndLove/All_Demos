@@ -4,6 +4,7 @@ import com.jikeh.bolt.NumberSumbolt;
 import com.jikeh.spout.NumberSourceSpout;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
+import org.apache.storm.StormSubmitter;
 import org.apache.storm.topology.TopologyBuilder;
 
 /**
@@ -24,8 +25,18 @@ public class NumberSumTopology {
         //通过分组策略，来指定我们接收上游数据的方式，上游发送数据的方式：随机发送、按字段名发送
         topologyBuilder.setBolt("sum_bolt_id", new NumberSumbolt()).shuffleGrouping("number_spout_id");
 
-        LocalCluster localCluster = new LocalCluster();
-        localCluster.submitTopology("sum_topology", new Config(), topologyBuilder.createTopology());
+        // 代码提交到本地模式上运行：
+//        LocalCluster localCluster = new LocalCluster();
+//        localCluster.submitTopology("sum_topology", new Config(), topologyBuilder.createTopology());
+
+        // 代码提交到Storm集群上运行：
+        String topoName = NumberSumTopology.class.getSimpleName();
+        try {
+            StormSubmitter.submitTopology(topoName, new Config(), topologyBuilder.createTopology());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
