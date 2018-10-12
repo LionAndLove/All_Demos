@@ -20,10 +20,10 @@ public class NumberSumTopology {
         //按照拓扑图来实现我们的代码
         //Topology需要指定Spout、Bolt的执行顺序
         TopologyBuilder topologyBuilder = new TopologyBuilder();
-        topologyBuilder.setSpout("number_spout_id", new NumberSourceSpout());
+        topologyBuilder.setSpout("number_spout_id", new NumberSourceSpout(), 2);
         //上下游通过什么来建立关系呢，要建立什么样的关系呢，即：通过什么方式来交互数据呢
         //通过分组策略，来指定我们接收上游数据的方式，上游发送数据的方式：随机发送、按字段名发送
-        topologyBuilder.setBolt("sum_bolt_id", new NumberSumbolt()).shuffleGrouping("number_spout_id");
+        topologyBuilder.setBolt("sum_bolt_id", new NumberSumbolt(), 2).setNumTasks(4).shuffleGrouping("number_spout_id");
 
         // 代码提交到本地模式上运行：
 //        LocalCluster localCluster = new LocalCluster();
@@ -32,7 +32,10 @@ public class NumberSumTopology {
         // 代码提交到Storm集群上运行：
         String topoName = NumberSumTopology.class.getSimpleName();
         try {
-            StormSubmitter.submitTopology(topoName, new Config(), topologyBuilder.createTopology());
+Config config = new Config();
+config.setNumWorkers(2);
+config.setNumAckers(0);
+            StormSubmitter.submitTopology(topoName, config, topologyBuilder.createTopology());
         } catch (Exception e) {
             e.printStackTrace();
         }
