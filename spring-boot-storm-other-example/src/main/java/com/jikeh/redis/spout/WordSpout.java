@@ -15,53 +15,73 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jikeh.redis.topology;
+package com.jikeh.redis.spout;
 
+import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;
-import org.apache.storm.topology.BasicOutputCollector;
-import org.apache.storm.topology.IBasicBolt;
+import org.apache.storm.topology.IRichSpout;
 import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.tuple.Fields;
-import org.apache.storm.tuple.Tuple;
 import org.apache.storm.tuple.Values;
-import com.google.common.collect.Maps;
 
 import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
-import static org.apache.storm.utils.Utils.tuple;
+public class WordSpout implements IRichSpout {
+    boolean isDistributed;
+    SpoutOutputCollector collector;
+    public static final String[] words = new String[] { "apple", "orange", "pineapple", "banana", "watermelon" };
 
-public class WordCounter implements IBasicBolt {
-    private Map<String, Integer> wordCounter = Maps.newHashMap();
+    public WordSpout() {
+        this(true);
+    }
+
+    public WordSpout(boolean isDistributed) {
+        this.isDistributed = isDistributed;
+    }
+
+    public boolean isDistributed() {
+        return this.isDistributed;
+    }
 
     @SuppressWarnings("rawtypes")
-    public void prepare(Map stormConf, TopologyContext context) {
+    public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
+        this.collector = collector;
     }
 
-    public void execute(Tuple input, BasicOutputCollector collector) {
-        String word = input.getStringByField("word");
-        int count;
-        if (wordCounter.containsKey(word)) {
-            count = wordCounter.get(word) + 1;
-            wordCounter.put(word, wordCounter.get(word) + 1);
-        } else {
-            count = 1;
-        }
+    public void close() {
 
-        wordCounter.put(word, count);
-        collector.emit(new Values(word, String.valueOf(count)));
     }
 
-    public void cleanup() {
+    public void nextTuple() {
+        final Random rand = new Random();
+        final String word = words[rand.nextInt(words.length)];
+        this.collector.emit(new Values(word), UUID.randomUUID());
+    }
+
+    public void ack(Object msgId) {
+
+    }
+
+    public void fail(Object msgId) {
 
     }
 
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("word", "count"));
+        declarer.declare(new Fields("word"));
+    }
+
+    @Override
+    public void activate() {
+    }
+
+    @Override
+    public void deactivate() {
     }
 
     @Override
     public Map<String, Object> getComponentConfiguration() {
         return null;
     }
-
 }
