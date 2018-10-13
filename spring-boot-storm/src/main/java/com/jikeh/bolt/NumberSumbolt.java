@@ -30,6 +30,7 @@ public class NumberSumbolt extends BaseRichBolt {
         Integer value = input.getIntegerByField("num");//通过名称来获取数据tuple
         sum += value;
         System.out.println("sum:"+sum);
+        System.out.println("Thread id: " + Thread.currentThread().getId() + " , rece data is : " + value);
     }
 
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
