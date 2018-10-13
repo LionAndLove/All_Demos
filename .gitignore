@@ -87,3 +87,7 @@
 /spring-boot-kafka-group-consumer/consumer2/target
 /spring-boot-kafka-group-consumer/consumer3/consumer3.iml
 /spring-boot-kafka-group-consumer/consumer3/target
+/spring-boot-storm-other-example/spring-boot-storm-other-example.iml
+/spring-boot-storm-other-example/.idea
+/spring-boot-storm-other-example/logs
+/spring-boot-storm-other-example/target
