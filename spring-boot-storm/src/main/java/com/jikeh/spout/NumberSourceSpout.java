@@ -8,6 +8,7 @@ import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Values;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 数据源产生，并发射数据：
@@ -39,8 +40,9 @@ public class NumberSourceSpout extends BaseRichSpout {
         System.out.println("spout:"+i);
 
         //new Value(可变参数)：这里面也可以发送多个值(可以是多种类型)，这与下面的declareOutputFields是对应的，这边一个，下面就一个；这边是两个，下面也就是两个；
-//        this.collector.emit(new Values(i++));
-        this.collector.emit(new Values(i%2, ++i));
+        UUID msgId = UUID. randomUUID();//tuple的唯一编号 msgId，可以根据你实际的业务场景来定义这个msgId
+        this.collector.emit(new Values(i++), msgId);
+//        this.collector.emit(new Values(i%2, ++i));
 
         //这里让其sleep几秒，因为我是本地模式执行，不能让其发送数据太快，以免将我们的本机给拖死
         try {
@@ -58,8 +60,33 @@ public class NumberSourceSpout extends BaseRichSpout {
         //我们发送给bolt时，可以发送多个字段：这里面可以传递可变参数
         //因为我们上面就emit了一个值，所以我们这里就定义一个字段就可以了
         //如果不定义字段，下游bolt还可以通过下标来获取数据tuple
-//        declarer.declare(new Fields("num"));
-        declarer.declare(new Fields("flag","num"));
+        declarer.declare(new Fields("num"));
+//        declarer.declare(new Fields("flag","num"));
     }
 
+    /**
+     * 处理成功被调用：
+     * @param msgId
+     */
+    @Override
+    public void ack(Object msgId) {
+        System.out.println("ack invoked msgId = [" + msgId + "]");
+    }
+
+    /**
+     * 处理失败被调用：
+     * @param msgId
+     */
+    @Override
+    public void fail(Object msgId) {
+        System.out.println("fail invoked msgId = [" + msgId + "]");
+
+        /**
+         * 对于失败的数据你要如何处理呢?
+         * 1、重新发送消息，下游要注意幂等性处理
+         * 2、持久化存储错误的消息编号
+         * 3、报警
+         */
+
+    }
 }

@@ -29,8 +29,26 @@ public class NumberSumbolt extends BaseRichBolt {
         //input.getInteger(0);//通过下标来获取数据tuple
         Integer value = input.getIntegerByField("num");//通过名称来获取数据tuple
         sum += value;
+
+/**
+ * 模拟成功失败场景：
+ */
+if(value % 2 == 0) {
+    this.collector.ack(input); // 确认消息处理成功
+} else {
+    this.collector.fail(input);  // 确认消息处理失败
+}
+
+        //真实业务一般会这样处理：
+//        try {
+//            // Your code is ……
+//            this.collector.ack(input);
+//        } catch (Exception e) {
+//            this.collector.fail(input);
+//        }
+
         System.out.println("sum:"+sum);
-        System.out.println("Thread id: " + Thread.currentThread().getId() + " , rece data is : " + value);
+//        System.out.println("Thread id: " + Thread.currentThread().getId() + " , rece data is : " + value);
     }
 
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
