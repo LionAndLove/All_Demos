@@ -7,6 +7,7 @@ import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
 import org.apache.storm.StormSubmitter;
 import org.apache.storm.topology.TopologyBuilder;
+import org.apache.storm.tuple.Fields;
 
 /**
  * 单词计数：
@@ -21,7 +22,7 @@ public class WordCountTopology {
         TopologyBuilder topologyBuilder = new TopologyBuilder();
         topologyBuilder.setSpout("word_spout_id", new WordSourceSpout());
         topologyBuilder.setBolt("split_bolt_id", new WordSplitbolt()).shuffleGrouping("word_spout_id");
-        topologyBuilder.setBolt("count_bolt_id", new WordCountbolt()).shuffleGrouping("split_bolt_id");
+        topologyBuilder.setBolt("count_bolt_id", new WordCountbolt(), 2).fieldsGrouping("split_bolt_id", new Fields("words"));
 
         // 代码提交到本地模式上运行：
 //        LocalCluster localCluster = new LocalCluster();

@@ -41,6 +41,7 @@ public class WordCountbolt extends BaseRichBolt {
         System.out.println("==================================");
         for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
             System.out.println(entry);
+            System.out.println("Thread id: " + Thread.currentThread().getId() + " , rece data is : " + entry);
         }
 
     }
