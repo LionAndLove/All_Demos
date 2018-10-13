@@ -39,7 +39,8 @@ public class NumberSourceSpout extends BaseRichSpout {
         System.out.println("spout:"+i);
 
         //new Value(可变参数)：这里面也可以发送多个值(可以是多种类型)，这与下面的declareOutputFields是对应的，这边一个，下面就一个；这边是两个，下面也就是两个；
-        this.collector.emit(new Values(i++));
+//        this.collector.emit(new Values(i++));
+        this.collector.emit(new Values(i%2, ++i));
 
         //这里让其sleep几秒，因为我是本地模式执行，不能让其发送数据太快，以免将我们的本机给拖死
         try {
@@ -57,7 +58,8 @@ public class NumberSourceSpout extends BaseRichSpout {
         //我们发送给bolt时，可以发送多个字段：这里面可以传递可变参数
         //因为我们上面就emit了一个值，所以我们这里就定义一个字段就可以了
         //如果不定义字段，下游bolt还可以通过下标来获取数据tuple
-        declarer.declare(new Fields("num"));
+//        declarer.declare(new Fields("num"));
+        declarer.declare(new Fields("flag","num"));
     }
 
 }

@@ -6,6 +6,7 @@ import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
 import org.apache.storm.StormSubmitter;
 import org.apache.storm.topology.TopologyBuilder;
+import org.apache.storm.tuple.Fields;
 
 /**
  * 自然数求和：1+2+……n
@@ -23,7 +24,8 @@ public class NumberSumTopology {
         topologyBuilder.setSpout("number_spout_id", new NumberSourceSpout());
         //上下游通过什么来建立关系呢，要建立什么样的关系呢，即：通过什么方式来交互数据呢
         //通过分组策略，来指定我们接收上游数据的方式，上游发送数据的方式：随机发送、按字段名发送
-        topologyBuilder.setBolt("sum_bolt_id", new NumberSumbolt(), 3).shuffleGrouping("number_spout_id");
+//        topologyBuilder.setBolt("sum_bolt_id", new NumberSumbolt(), 3).shuffleGrouping("number_spout_id");
+        topologyBuilder.setBolt("sum_bolt_id", new NumberSumbolt(), 3).fieldsGrouping("number_spout_id", new Fields("flag"));
 
         // 代码提交到本地模式上运行：
 //        LocalCluster localCluster = new LocalCluster();
