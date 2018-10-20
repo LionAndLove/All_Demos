@@ -95,3 +95,7 @@
 /spring-boot-performance-tuning/.idea
 /spring-boot-performance-tuning/target
 /spring-boot-performance-tuning/java_pid3500.hprof
+/spring-boot-storm-kafka/spring-boot-storm-kafka.iml
+/spring-boot-storm-kafka/.idea
+/spring-boot-storm-kafka/logs
+/spring-boot-storm-kafka/target
