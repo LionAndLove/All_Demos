@@ -27,7 +27,7 @@ public class KafkaProducerTopology {
         TopologyBuilder builder = new TopologyBuilder();
 
         //1、spout源数据
-        MessageSpout messageSpout = new MessageSpout(new Fields("key", "value"));
+        MessageSpout messageSpout = new MessageSpout(new Fields("key", "message"));
 
         builder.setSpout("spout", messageSpout);
 
@@ -42,7 +42,8 @@ public class KafkaProducerTopology {
         KafkaBolt bolt = new KafkaBolt()
                 .withProducerProperties(props)
                 .withTopicSelector(new DefaultTopicSelector(topicName))
-                .withTupleToKafkaMapper(new FieldNameBasedTupleToKafkaMapper("key", "value"));
+//                .withTupleToKafkaMapper(new FieldNameBasedTupleToKafkaMapper("key", "value"))
+                ;
         builder.setBolt("bolt", bolt).shuffleGrouping("spout");
 
         //3、本地模式运行我们的storm作业
