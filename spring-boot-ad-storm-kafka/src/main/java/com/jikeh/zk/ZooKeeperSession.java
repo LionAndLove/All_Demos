@@ -33,7 +33,7 @@ public class ZooKeeperSession {
 		// 通过一个监听器+CountDownLatch，来确认真正建立了zk server的连接
 		try {
 			this.zookeeper = new ZooKeeper(
-					"localhost:2181",
+					"192.168.199.147:2181",
 					50000,
 					new ZooKeeperWatcher());
 

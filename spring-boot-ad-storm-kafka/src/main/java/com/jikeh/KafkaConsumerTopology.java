@@ -1,6 +1,7 @@
 package com.jikeh;
 
-import com.jikeh.bolt.KafkaConsumerBolt;
+import com.jikeh.bolt.LogParseKafkaBolt;
+import com.jikeh.bolt.AdCountBolt;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
 import org.apache.storm.kafka.KafkaSpout;
@@ -9,8 +10,7 @@ import org.apache.storm.kafka.StringScheme;
 import org.apache.storm.kafka.ZkHosts;
 import org.apache.storm.spout.SchemeAsMultiScheme;
 import org.apache.storm.topology.TopologyBuilder;
-
-import java.util.UUID;
+import org.apache.storm.tuple.Fields;
 
 /**
  * 更多免费资料，更多高清内容，更多java技术，欢迎访问网站
@@ -34,7 +34,8 @@ public class KafkaConsumerTopology {
         String offsetZkRoot = "/" + topic;
 
         //存储该spout id的消费offset信息,譬如以topoName来命名
-        String offsetZkId = UUID.randomUUID().toString();
+        //Storm从Kafka消费的Group
+        String offsetZkId = "exposure-log-consumer";
 
         SpoutConfig kafkaConfig = new SpoutConfig(zkHosts, topic, offsetZkRoot, offsetZkId);
         kafkaConfig.scheme = new SchemeAsMultiScheme(new StringScheme());
@@ -45,12 +46,15 @@ public class KafkaConsumerTopology {
         KafkaSpout spout = new KafkaSpout(kafkaConfig);
 
         TopologyBuilder builder = new TopologyBuilder();
-        builder.setSpout("spout", spout);
+        builder.setSpout("spout", spout, 3);
 
-        //2、处理kafka消息
-        builder.setBolt("bolt", new KafkaConsumerBolt()).shuffleGrouping("spout");
+        //2、解析kafka消息日志
+        builder.setBolt("LogParseKafkaBolt", new LogParseKafkaBolt(), 3).shuffleGrouping("spout");
 
-        //3、本地模式运行我们的storm作业
+        //3、计数
+        builder.setBolt("AdCountBolt", new AdCountBolt()).fieldsGrouping("LogParseKafkaBolt", new Fields("adId"));
+
+        //4、本地模式运行我们的storm作业
         Config config = new Config();
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("KafkaConsumerTopology", config, builder.createTopology());
