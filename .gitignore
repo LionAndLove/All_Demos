@@ -99,3 +99,7 @@
 /spring-boot-storm-kafka/.idea
 /spring-boot-storm-kafka/logs
 /spring-boot-storm-kafka/target
+/spring-boot-ad-storm-kafka/spring-boot-ad-storm-kafka.iml
+/spring-boot-ad-storm-kafka/.idea
+/spring-boot-ad-storm-kafka/logs
+/spring-boot-ad-storm-kafka/target
