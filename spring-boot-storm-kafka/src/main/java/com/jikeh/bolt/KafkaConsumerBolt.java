@@ -24,18 +24,18 @@ public class KafkaConsumerBolt extends BaseRichBolt {
 
     @Override
     public void execute(Tuple tuple) {
-
-        String message = tuple.getStringByField("str");
+        try {
+            String message = tuple.getStringByField("str");
 
 //        String message = tuple.getString(0);
 
-        System.out.println("--->" + message);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("--->" + message);
+
+            this.collector.ack(tuple);
+
+        } catch (Exception e) {
+            this.collector.fail(tuple);
         }
-//        collector.ack(tuple);
     }
 
     @Override

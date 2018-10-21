@@ -24,7 +24,8 @@ public class KafkaConsumerTopology {
         //1、Kafka Spout
 
         //这个地方其实就是kafka配置文件里边的zookeeper.connect这个参数，可以去那里拿过来。
-        String brokerZkStr = "localhost:2181";
+        //ZkStr 字符串格式是 ip:port（例如：localhost:2181）.brokerZkPath 是存储所有 topic 和 partition信息的zk 根路径.默认情况下，Kafka使用 /brokers路径.
+        String brokerZkStr = "192.168.199.147:2181";
         ZkHosts zkHosts = new ZkHosts(brokerZkStr);
 
         String topic = "jikeh";
@@ -37,14 +38,20 @@ public class KafkaConsumerTopology {
 
         SpoutConfig kafkaConfig = new SpoutConfig(zkHosts, topic, offsetZkRoot, offsetZkId);
         kafkaConfig.scheme = new SchemeAsMultiScheme(new StringScheme());
+
+        //kafka.api.OffsetRequest.EarliestTime(): 从topic 初始位置读取消息 (例如，从最老的那个消息开始)
+        //kafka.api.OffsetRequest.LatestTime(): 从topic尾部开始读取消息 (例如，新写入topic的信息)
+        kafkaConfig.startOffsetTime = kafka.api.OffsetRequest.LatestTime();
         KafkaSpout spout = new KafkaSpout(kafkaConfig);
 
         TopologyBuilder builder = new TopologyBuilder();
         builder.setSpout("spout", spout);
+
+        //2、处理kafka消息
         builder.setBolt("bolt", new KafkaConsumerBolt()).shuffleGrouping("spout");
 
+        //3、本地模式运行我们的storm作业
         Config config = new Config();
-
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("KafkaConsumerTopology", config, builder.createTopology());
 
