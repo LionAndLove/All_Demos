@@ -103,3 +103,6 @@
 /spring-boot-ad-storm-kafka/.idea
 /spring-boot-ad-storm-kafka/logs
 /spring-boot-ad-storm-kafka/target
+/spring-boot-hystrix-circuit-breaker/spring-boot-hystrix-cache.iml
+/spring-boot-hystrix-circuit-breaker/.idea
+/spring-boot-hystrix-circuit-breaker/target
