@@ -106,3 +106,6 @@
 /spring-boot-hystrix-circuit-breaker/spring-boot-hystrix-cache.iml
 /spring-boot-hystrix-circuit-breaker/.idea
 /spring-boot-hystrix-circuit-breaker/target
+/spring-boot-hystrix-fail-silient/spring-boot-hystrix-fail-silient.iml
+/spring-boot-hystrix-fail-silient/.idea
+/spring-boot-hystrix-fail-silient/target
