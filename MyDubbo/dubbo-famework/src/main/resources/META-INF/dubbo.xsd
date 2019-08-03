@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.luo.com/schema/dubbo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:tool="http://www.springframework.org/schema/tool"
+	targetNamespace="http://www.luo.com/schema/dubbo">
+
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+	<xsd:import namespace="http://www.springframework.org/schema/beans" />
+	<xsd:import namespace="http://www.springframework.org/schema/tool" />
+
+	<xsd:annotation>
+		<xsd:documentation><![CDATA[ Namespace support for the dubbo services provided by dubbo framework. ]]></xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="registry">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:ID">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The unique identifier for a bean. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="address" type="xsd:string" use="optional"
+				default="127.0.0.1:2181">
+			</xsd:attribute>
+			<xsd:attribute name="implClass" type="xsd:string" use="optional"
+				default="com.luo.dubbo.registry.natives.ZKRegistry">
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	
+		<xsd:element name="protocol">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:ID">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The unique identifier for a bean. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="port" type="xsd:int" use="optional"
+				default="21881">
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="service">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:ID">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The unique identifier for a bean. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="version" type="xsd:string" use="optional"
+				default="0.0.0">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The service version. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="timeout" type="xsd:string" use="optional"
+				default="0">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The method invoke timeout. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="interface" type="xsd:token" use="required">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ Defines the interface to advertise for this service in the service registry. ]]></xsd:documentation>
+					<xsd:appinfo>
+						<tool:annotation>
+							<tool:expected-type type="java.lang.Class" />
+						</tool:annotation>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="ref" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The service implementation instance bean id. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="reference">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:ID" use="required">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The unique identifier for a bean. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="version" type="xsd:string" use="optional"
+				default="0.0.0">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The service version. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="timeout" type="xsd:string" use="optional"
+				default="0">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The method invoke timeout. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="interface" type="xsd:token" use="required">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ Defines the interface to advertise for this service in the service registry. ]]></xsd:documentation>
+					<xsd:appinfo>
+						<tool:annotation>
+							<tool:expected-type type="java.lang.Class" />
+						</tool:annotation>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="ref" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The service implementation instance bean id. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+
+
+
+</xsd:schema>

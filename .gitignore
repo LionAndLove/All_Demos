@@ -109,3 +109,11 @@
 /spring-boot-hystrix-fail-silient/spring-boot-hystrix-fail-silient.iml
 /spring-boot-hystrix-fail-silient/.idea
 /spring-boot-hystrix-fail-silient/target
+/MyDubbo/dubbo-consumer-webtest/dubbo-consumer-webtest.iml
+/MyDubbo/dubbo-consumer-webtest/.idea
+/MyDubbo/dubbo-consumer-webtest/classes
+/MyDubbo/dubbo-famework/dubbo-famework.iml
+/MyDubbo/dubbo-famework/.idea
+/MyDubbo/dubbo-provider_test/dubbo-test.iml
+/MyDubbo/dubbo-provider_test/.idea
+/MyDubbo/dubbo-provider_test/logs

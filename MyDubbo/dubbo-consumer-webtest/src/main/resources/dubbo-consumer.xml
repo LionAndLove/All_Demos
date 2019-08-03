@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://www.luo.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  
+	  http://www.luo.com/schema/dubbo http://www.luo.com/schema/dubbo/dubbo.xsd">
+
+
+	<dubbo:registry/>
+
+	<dubbo:protocol port="20881" />
+
+	<dubbo:reference id="userService"
+		interface="com.luo.provider.service.UserService" />
+
+</beans> 
