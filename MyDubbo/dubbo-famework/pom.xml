@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.luo</groupId>
 	<artifactId>dubbo-famework</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>2.0.1</version>
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
@@ -106,8 +106,8 @@
 
 	<distributionManagement>
 		<repository>
-			<id>jikeh-release</id>
-			<name>jikeh-release</name>
+			<id>jikeh</id>
+			<name>jikeh</name>
 			<url>file:E:\repository\</url>
 		</repository>
 	</distributionManagement>

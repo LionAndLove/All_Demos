@@ -117,3 +117,6 @@
 /MyDubbo/dubbo-provider_test/dubbo-test.iml
 /MyDubbo/dubbo-provider_test/.idea
 /MyDubbo/dubbo-provider_test/logs
+/MyDubbo/dubbo-provider_test/target
+/MyDubbo/dubbo-consumer-webtest/target
+/MyDubbo/dubbo-famework/target
