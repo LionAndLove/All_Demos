@@ -10,7 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import com.luo.dubbo.util.Assert;
 
 /***
- * 抽象 spring context
+ * 抽象 spring context（spring上下文, 面向用户； beanfactory是面向底层的） <=> ApplicationContext
  * 
  * @author HadLuo
  * @since JDK1.7
@@ -23,10 +23,15 @@ public abstract class SpringContext extends AbstractContext {
      */
     private BeanFactory springContext;
 
+    //获取spring容器
     BeanFactory spring() {
         return springContext;
     }
 
+    /**
+     * 加载配置文件初始化springContext
+     * @param springContext
+     */
     public void setSpringContext(BeanFactory springContext) {
         this.springContext = springContext;
     }
@@ -35,13 +40,15 @@ public abstract class SpringContext extends AbstractContext {
         // TODO Auto-generated method stub
     }
 
+    //初始化spring容器FileSystemXmlAppSpringContext#onCreate
     public void setBeanFactory(BeanFactory springContext) {
         Assert.isNull(springContext, "Bean Factory is null");
         setSpringContext(springContext);
     }
 
     /***
-     * 动态 设置 bean
+     * 动态 设置 bean(解析dubbo标签的时候, 将bean注册到spring容器中,即：通过beanfactory可以获取bean)
+     * BeanParser#parse
      * 
      * @param name
      * @param beanClass
@@ -65,6 +72,11 @@ public abstract class SpringContext extends AbstractContext {
 
     }
 
+    /**
+     * 从spring容器中获取bean
+     * @param name
+     * @return
+     */
     public Object getBean(String name) {
         return spring().getBean(name);
     }

@@ -7,7 +7,7 @@
 	  http://www.luo.com/schema/dubbo http://www.luo.com/schema/dubbo/dubbo.xsd">
 
 
-	<dubbo:registry/>
+	<dubbo:registry address="127.0.0.1:2181" />
 
 	<dubbo:protocol port="20881" />
 

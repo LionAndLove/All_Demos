@@ -17,6 +17,7 @@ public class DubboBeanFactory {
     public static DubboBean createBean(Class<?> clazz, Map<String, Object> properties) {
         try {
             DubboBean dubboBean = (DubboBean) clazz.newInstance();
+            //遍历map<key, value>中的key，如果bean中有这个属性，就把这个key对应的value值赋给bean的属性。
             BeanUtils.populate(dubboBean, properties);
             return dubboBean;
         } catch (Exception e) {

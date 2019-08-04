@@ -25,11 +25,13 @@ public final class ContextFactory {
         isWeb = false;
         DubboContext dubbo = new DubboContext();
         FileSystemXmlAppSpringContext spring = new FileSystemXmlAppSpringContext();
-        // 构造spring
+        // 构造SpringContext：web bean
         putContext(ContextEnum.SPRING, spring);
-        // 构造dubbo
+        // 构造DubboContext：dubbo bean
         putContext(ContextEnum.DUBBO, dubbo);
+        //初始化beanfactory：SpringContext
         spring.onCreate();
+        //
         dubbo.onCreate();
     }
 

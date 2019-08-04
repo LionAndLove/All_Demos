@@ -138,7 +138,7 @@ public final class UnSafe implements Service {
         if (!node.validate()) {
             throw new IllegalArgumentException();
         }
-        // ------ 这里不能 直接创建多级目录，否则zookeeper报错
+        // ------ 这里不能 直接创建多级目录，否则zookeeper报错 ==> 需要手动创建节点
         if (!registry.isExistence(PathInfo.Root)) {
             // 必须是 永久性节点信息， 因为 zk
             registry.createPersistentNode(PathInfo.Root);

@@ -85,6 +85,7 @@ public class ConsumerHandler extends Handler {
                 Log.e("不能创建远程代理对象 ，address:" + provider.getAddress() + "  interface:" + provider.getInter());
                 return;
             }
+            //将bean初始化到bean容器中
             injectSpring(proxy, referenceBean);
         } catch (Exception e) {
             e.printStackTrace();
