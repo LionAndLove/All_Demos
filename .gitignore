@@ -120,3 +120,6 @@
 /MyDubbo/dubbo-provider_test/target
 /MyDubbo/dubbo-consumer-webtest/target
 /MyDubbo/dubbo-famework/target
+/MyDubbo/dubbo-spring/dubbo-spring.iml
+/MyDubbo/dubbo-spring/.idea
+/MyDubbo/dubbo-spring/target
