@@ -1,0 +1,2 @@
+post=com.hadluo.dubbo.http.GetHttp
+get=com.hadluo.dubbo.http.PostHttp
