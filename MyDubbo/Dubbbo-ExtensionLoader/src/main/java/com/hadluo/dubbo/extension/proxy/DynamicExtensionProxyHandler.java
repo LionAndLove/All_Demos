@@ -44,15 +44,24 @@ public class DynamicExtensionProxyHandler implements ExtensionProxy {
         }
     }
 
+    /**
+     * 双层代理：
+     * @param proxy
+     * @param method
+     * @param args
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        //获取默认key
         String extensionKey = methodConfiguration.get(method.getName());
         if (extensionKey == null) {
             throw new UnsupportedOperationException(extensionInterfaceClass.getName() + "接口的 "
                     + method.getName() + "方法 必须配置adaptive注解");
         }
-        Object object = ExtensionLoader.getExtensionLoader(extensionInterfaceClass).getAdaptiveExtension(
-                extensionKey);
+        //调用单层代理
+        Object object = ExtensionLoader.getExtensionLoader(extensionInterfaceClass).getAdaptiveExtension(extensionKey);
         if (object == null) {
             throw new RuntimeException("找不到  extension key :" +extensionKey);
         }
