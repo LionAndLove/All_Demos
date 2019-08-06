@@ -1,4 +1,4 @@
-package com.hadluo.dubbo.extension.Proxy;
+package com.hadluo.dubbo.extension.proxy;
 
 import com.hadluo.dubbo.extension.spi.Adaptive;
 import com.hadluo.dubbo.extension.ExtensionLoader;

@@ -1,4 +1,4 @@
-package com.hadluo.dubbo.extension.Proxy;
+package com.hadluo.dubbo.extension.proxy;
 
 import java.lang.reflect.Method;
 

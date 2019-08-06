@@ -1,7 +1,7 @@
 package com.hadluo.dubbo.extension;
 
-import com.hadluo.dubbo.extension.Proxy.DynamicExtensionProxyHandler;
-import com.hadluo.dubbo.extension.Proxy.FixExtensionProxyHandler;
+import com.hadluo.dubbo.extension.proxy.DynamicExtensionProxyHandler;
+import com.hadluo.dubbo.extension.proxy.FixExtensionProxyHandler;
 
 import java.lang.reflect.Proxy;
 
