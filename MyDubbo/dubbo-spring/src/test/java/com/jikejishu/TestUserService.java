@@ -1,5 +1,6 @@
 package com.jikejishu;
 
+import com.jikejishu.dubbo.spring.rpc.HelloService;
 import com.jikejishu.dubbo.spring.rpc.MenuService;
 import com.jikejishu.dubbo.spring.rpc.ProxyFactory;
 import org.junit.Test;
@@ -18,6 +19,9 @@ public class TestUserService {
 	@Autowired
 	private MenuService menuService;
 
+	@Autowired
+	private HelloService helloService;
+
 	@Test
 	public void test() {
 		ProxyFactory proxyFactory = new ProxyFactory(MenuService.class);
@@ -28,6 +32,7 @@ public class TestUserService {
 	@Test
 	public void test2(){
 		menuService.sayHello();
+		helloService.sayHello();
 	}
 
 }

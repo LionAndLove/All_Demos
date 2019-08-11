@@ -25,6 +25,7 @@ public class ProxyFactory implements InvocationHandler {
         System.out.println("进行编码");
         System.out.println("发送网络请求");
         System.out.println("将网络请求结果进行解码并返回");
+        //根据注解获取key，再完成一次动态代理
         return null;
     }
 }

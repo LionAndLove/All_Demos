@@ -8,4 +8,6 @@
 
     <tobyRPC:reference id="menuService" interface="com.jikejishu.dubbo.spring.rpc.MenuService" />
 
+    <tobyRPC:reference id="helloService" interface="com.jikejishu.dubbo.spring.rpc.HelloService" />
+
 </beans>
