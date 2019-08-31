@@ -14,7 +14,8 @@ public class demo {
     public static void main(String[] args) {
         Invoker<UserInvoker> last = buildChain(new UserInvoker());
         System.out.println(last.invoke("test"));
-
+        UserInvoker.SubUserInvoker subUserInvoker = new UserInvoker.SubUserInvoker();
+        System.out.println(subUserInvoker);
     }
 
     private static Invoker<UserInvoker> buildChain(Invoker<UserInvoker> invoker){

@@ -7,4 +7,8 @@ public class UserInvoker implements Invoker{
         return "手写Invoker"+invocation;
     }
 
+    public static class SubUserInvoker {
+        private String name;
+    }
+
 }
