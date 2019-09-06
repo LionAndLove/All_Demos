@@ -18,6 +18,7 @@ package com.jikeh.netty;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -94,12 +95,14 @@ public final class HttpSnoopClient {
                             new DefaultCookie("another-cookie", "bar")));
 
             // Send the HTTP request.
-            ch.writeAndFlush(request);
+            ChannelFuture channelFuture = ch.writeAndFlush(request);
+//            channelFuture.await(1, TimeUnit.MICROSECONDS);
+            channelFuture.get(100, TimeUnit.SECONDS);
 
             // Wait for the server to close the connection.
-//            ch.closeFuture().sync();
+            ch.closeFuture().sync();
 
-            ch.closeFuture().await(1, TimeUnit.MILLISECONDS);
+//            ch.closeFuture().await(1, TimeUnit.MILLISECONDS);
         } catch (Exception e){
             e.printStackTrace();
             System.out.println("异常");
