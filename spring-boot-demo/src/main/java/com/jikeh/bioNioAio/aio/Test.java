@@ -1,9 +1,9 @@
 package com.jikeh.bioNioAio.aio;
 
-import java.util.Scanner;
+import com.jikeh.bioNioAio.aio.client.Client;
+import com.jikeh.bioNioAio.aio.server.Server;
 
-import com.tuling.netty.day1.aio.client.Client;
-import com.tuling.netty.day1.aio.server.Server;
+import java.util.Scanner;
 
 /** 
  * 测试
@@ -13,11 +13,11 @@ public class Test {
     @SuppressWarnings("resource")  
     public static void main(String[] args) throws Exception{  
         //运行服务器  
-        Server.start();  
+        Server.start();
         //避免客户端先于服务器启动前执行代码  
         Thread.sleep(100);  
         //运行客户端   
-        Client.start();  
+        Client.start();
         System.out.println("请输入请求消息：");  
         Scanner scanner = new Scanner(System.in);  
         while(Client.sendMsg(scanner.nextLine()));  

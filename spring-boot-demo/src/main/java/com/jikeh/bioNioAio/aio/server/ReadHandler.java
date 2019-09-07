@@ -1,12 +1,12 @@
 package com.jikeh.bioNioAio.aio.server;
 
+import com.jikeh.bioNioAio.aio.Calculator;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
-
-import com.tuling.netty.day1.aio.Calculator;
 
 public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {  
     //用于读取半包消息和发送应答  
@@ -27,7 +27,7 @@ public class ReadHandler implements CompletionHandler<Integer, ByteBuffer> {
             System.out.println("服务器收到消息: " + expression);  
             String calrResult = null;  
             try{  
-                calrResult = Calculator.cal(expression).toString();  
+                calrResult = Calculator.cal(expression).toString();
             }catch(Exception e){  
                 calrResult = "计算错误：" + e.getMessage();  
             }  

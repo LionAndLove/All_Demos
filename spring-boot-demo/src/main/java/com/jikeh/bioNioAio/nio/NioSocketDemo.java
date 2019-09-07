@@ -53,29 +53,34 @@ public class NioSocketDemo {
 			// 当注册的事件到达时，方法返回；否则,该方法会一直阻塞
 			// 多路复用  Reactor模型
 			this.selector.select();
+
 			// 无论是否有读写事件发生，selector每隔1s被唤醒一次  
 			 //this.selector.select(1000);
 			 //this.selector.selectNow();
+
 			// 获得selector中选中的项的迭代器，选中的项为注册的事件
+			//基于操作系统的epoll模型，完成的事件推送机制，直接将事件塞到selectedKeys集合中去！！！
 			Iterator<?> iteratorKey = this.selector.selectedKeys().iterator();
 			while (iteratorKey.hasNext()) {
 				SelectionKey selectionKey = (SelectionKey) iteratorKey.next();
 				// 删除已选的key,以防重复处理
 				iteratorKey.remove();
-				
-				new Thread(new Runnable() {
-					
-					@Override
-					public void run() {
-						// 处理请求
-						try {
-							handler(selectionKey);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						
-					}
-				});
+				handler(selectionKey);
+
+				//没你想象的那么简单，这种实现方式是不对的，那如何实现多线程的方式呢？netty就完成了这个骚操作！！！
+//				new Thread(new Runnable() {
+//
+//					@Override
+//					public void run() {
+//						// 处理请求
+//						try {
+//							handler(selectionKey);
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						}
+//
+//					}
+//				}).start();
 				
 			}
 		}
@@ -93,6 +98,7 @@ public class NioSocketDemo {
 			SocketChannel channel = server.accept();
 			// 设置成非阻塞
 			channel.configureBlocking(false);
+
 			// 在和客户端连接成功之后，为了可以接收到客户端的信息，需要给通道设置读的权限。
 			channel.register(this.selector, SelectionKey.OP_READ);
 		} else if (selectionKey.isReadable()) {// 处理读的事件
@@ -107,7 +113,7 @@ public class NioSocketDemo {
 				
 				//回写数据
 				ByteBuffer writeBackBuffer = ByteBuffer.wrap("receive data".getBytes("GBK"));
-				channel.write(writeBackBuffer);// 将消息回送给客户端
+				channel.write(writeBackBuffer);// 将消息回送给客户端（会发送一个可读事件到selector，然后selector监听到了该事件，便会找到可以处理该事件的channel，然后交由该channel进行处理）
 			}else{
 				System.out.println("客户端关闭咯...");
 				//SelectionKey对象会失效，这意味着Selector再也不会监控与它相关的事件
