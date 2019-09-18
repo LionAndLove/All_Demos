@@ -51,7 +51,7 @@ public class NioSocketDemo {
 		// 轮询访问selector
 		while (true) {
 			// 当注册的事件到达时，方法返回；否则,该方法会一直阻塞
-			// 多路复用  Reactor模型
+			// 多路复用  Reactor模型(epoll模型)
 			this.selector.select();
 
 			// 无论是否有读写事件发生，selector每隔1s被唤醒一次  
@@ -63,7 +63,7 @@ public class NioSocketDemo {
 			Iterator<?> iteratorKey = this.selector.selectedKeys().iterator();
 			while (iteratorKey.hasNext()) {
 				SelectionKey selectionKey = (SelectionKey) iteratorKey.next();
-				// 删除已选的key,以防重复处理
+				// 删除已选的key,以防重复处理(只是一个标记，并没有真正的删除)
 				iteratorKey.remove();
 				handler(selectionKey);
 
