@@ -127,7 +127,7 @@ public class BenchRunner {
         } else {
             config.setKeepAlive(true);
             config.setRequests(1000);
-            config.setConcurrency(2);
+            config.setConcurrency(50);
         }
         return config;
     }
