@@ -28,6 +28,12 @@ package com.jikeh.httpclient.demo1;
 
 import java.net.URI;
 
+/**
+ * 测试结论：
+ * 1、单线程
+ * 2、线程数 >> CPU核数
+ * 3、线程数 << CPU核数
+ */
 public class Benchmark {
 
     public static void main(final String[] args) throws Exception {

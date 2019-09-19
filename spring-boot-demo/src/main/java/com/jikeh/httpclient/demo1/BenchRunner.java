@@ -126,8 +126,8 @@ public class BenchRunner {
 
         } else {
             config.setKeepAlive(true);
-            config.setRequests(1000);
-            config.setConcurrency(50);
+            config.setRequests(100);
+            config.setConcurrency(1);
         }
         return config;
     }
@@ -148,7 +148,7 @@ public class BenchRunner {
             // Warm up
             agent.get(warmup, 500, 2);
             // Sleep a little
-            Thread.sleep(5000);
+//            Thread.sleep(5000);
 
             System.out.println("=================================");
             System.out.println("HTTP agent: " + agent.getClientName());
