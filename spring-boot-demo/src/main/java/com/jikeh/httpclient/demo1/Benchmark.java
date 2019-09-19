@@ -40,6 +40,7 @@ public class Benchmark {
         System.out.println("Running benchmark against " + config.getUri());
         BenchRunner.run(new ApacheHttpClient(), config);
         BenchRunner.run(new ApacheHttpAsyncClient(), config);
+        BenchRunner.run(new NingHttpClient(), config);
     }
 
 }
