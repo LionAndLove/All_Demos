@@ -38,14 +38,13 @@ public class Benchmark {
 
     public static void main(final String[] args) throws Exception {
         final Config config = BenchRunner.parseConfig(args);
-        config.setUri(new URI("https://www.baidu.com"));
+        config.setUri(new URI("https://www.163.com"));
         if (config.getUri() == null) {
             System.err.println("Please specify a target URI");
             System.exit(-1);
         }
         System.out.println("Running benchmark against " + config.getUri());
         BenchRunner.run(new ApacheHttpClient(), config);
-        BenchRunner.run(new ApacheHttpAsyncClient(), config);
         BenchRunner.run(new NingHttpClient(), config);
     }
 

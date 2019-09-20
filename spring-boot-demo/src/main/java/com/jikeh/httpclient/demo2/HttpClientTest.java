@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
  * author: sunshow.
  */
 public class HttpClientTest {
-    private static final String fetchUrl = "https://www.baidu.com";
+    private static final String fetchUrl = "https://www.163.com";
     private final OkHttpClient client = new OkHttpClient();
     AsyncHttpClient asyncHttpClient = new DefaultAsyncHttpClient();
 

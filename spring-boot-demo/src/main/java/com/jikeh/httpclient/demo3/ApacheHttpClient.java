@@ -37,6 +37,7 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.util.EntityUtils;
 import org.apache.http.util.VersionInfo;
 
 import java.io.IOException;
@@ -91,22 +92,10 @@ public class ApacheHttpClient implements HttpAgent {
         try {
             final HttpResponse response = httpclient.execute(request);
             final HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                final InputStream instream = entity.getContent();
-                contentLen = 0;
-                if (instream != null) {
-                    try {
-                        int l = 0;
-                        while ((l = instream.read(buffer)) != -1) {
-                            contentLen += l;
-                        }
-                    } finally {
-                        instream.close();
-                    }
-                }
-            }
             if (response.getStatusLine().getStatusCode() == 200) {
                 stats.success(contentLen);
+                String str = EntityUtils.toString(entity);
+                System.out.println(str);
             } else {
                 stats.failure(contentLen);
             }
