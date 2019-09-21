@@ -20,6 +20,14 @@ public class Code_04_QuickSort {
 		}
 	}
 
+	/**
+	 * 以arr[r]为partition节点：
+	 *
+	 * @param arr
+	 * @param l
+	 * @param r
+	 * @return
+	 */
 	public static int[] partition(int[] arr, int l, int r) {
 		int less = l - 1;
 		int more = r;

@@ -22,7 +22,9 @@ public class Code_05_MergeSort {
 	}
 
 	public static void merge(int[] arr, int l, int m, int r) {
+		//新数组
 		int[] help = new int[r - l + 1];
+		//新数组的下标
 		int i = 0;
 		int p1 = l;
 		int p2 = m + 1;
@@ -35,6 +37,7 @@ public class Code_05_MergeSort {
 		while (p2 <= r) {
 			help[i++] = arr[p2++];
 		}
+		//copy回原数组
 		for (i = 0; i < help.length; i++) {
 			arr[l + i] = help[i];
 		}

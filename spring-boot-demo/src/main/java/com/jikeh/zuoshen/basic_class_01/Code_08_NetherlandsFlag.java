@@ -2,6 +2,14 @@ package com.jikeh.zuoshen.basic_class_01;
 
 public class Code_08_NetherlandsFlag {
 
+	/**
+	 *
+	 * @param arr
+	 * @param l
+	 * @param r
+	 * @param p
+	 * @return ==p区域的[左边界, 右边界]
+	 */
 	public static int[] partition(int[] arr, int l, int r, int p) {
 		int less = l - 1;
 		int more = r + 1;

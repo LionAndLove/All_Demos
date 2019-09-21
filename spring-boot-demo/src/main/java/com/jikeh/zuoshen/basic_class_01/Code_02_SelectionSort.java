@@ -8,6 +8,7 @@ public class Code_02_SelectionSort {
 		if (arr == null || arr.length < 2) {
 			return;
 		}
+		//外层for循环：从开始的位置~最后
 		for (int i = 0; i < arr.length - 1;  i++) {
 			int minIndex = i;
 			for (int j = i + 1; j < arr.length; j++) {
