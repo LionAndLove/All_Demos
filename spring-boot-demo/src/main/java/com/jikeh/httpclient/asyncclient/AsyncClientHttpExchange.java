@@ -1,17 +1,22 @@
 package com.jikeh.httpclient.asyncclient;
 
+import org.apache.http.Consts;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.config.ConnectionConfig;
+import org.apache.http.config.MessageConstraints;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.http.impl.nio.conn.PoolingNHttpClientConnectionManager;
 import org.apache.http.impl.nio.reactor.DefaultConnectingIOReactor;
+import org.apache.http.impl.nio.reactor.IOReactorConfig;
 import org.apache.http.nio.reactor.ConnectingIOReactor;
 import org.apache.http.util.EntityUtils;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+import java.nio.charset.CodingErrorAction;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -28,14 +33,32 @@ public class AsyncClientHttpExchange {
     static {
         try {
             RequestConfig requestConfig = RequestConfig.custom()
-                    .setSocketTimeout(1)
-                    .setConnectTimeout(1)
+                    .setSocketTimeout(100)
+                    .setConnectTimeout(100)
                     .build();
 
-            ConnectingIOReactor ioReactor = new DefaultConnectingIOReactor();
+            // Create I/O reactor configuration
+            IOReactorConfig ioReactorConfig = IOReactorConfig.custom()
+                    .setIoThreadCount(Runtime.getRuntime().availableProcessors())
+                    .setConnectTimeout(1)
+                    .setSoTimeout(1)
+                    .setIoThreadCount(300)
+                    .build();
+            ConnectingIOReactor ioReactor = new DefaultConnectingIOReactor(ioReactorConfig);
             PoolingNHttpClientConnectionManager connManager = new PoolingNHttpClientConnectionManager(ioReactor);
+
+            MessageConstraints messageConstraints = MessageConstraints.custom()
+                    .setMaxHeaderCount(200)
+                    .setMaxLineLength(2000)
+                    .build();
+            ConnectionConfig connectionConfig = ConnectionConfig.custom()
+                    .setMalformedInputAction(CodingErrorAction.IGNORE)
+                    .setUnmappableInputAction(CodingErrorAction.IGNORE)
+                    .setCharset(Consts.UTF_8)
+                    .setMessageConstraints(messageConstraints)
+                    .build();
+            connManager.setDefaultConnectionConfig(connectionConfig);
             connManager.setMaxTotal(500);
-            connManager.setDefaultMaxPerRoute(500);
 
             httpclient = HttpAsyncClients.custom().setConnectionManager(connManager)
                     .setDefaultRequestConfig(requestConfig)
@@ -43,6 +66,8 @@ public class AsyncClientHttpExchange {
             httpclient.start();
         } catch (Exception e) {
             // TODO: handle exception
+            e.printStackTrace();
+            System.out.println("未知异常");
         }
 
     }
@@ -57,9 +82,9 @@ public class AsyncClientHttpExchange {
             System.out.println("Shutting down");
         } catch (Exception e) {
             if (e instanceof ConnectException) {
-                System.out.println("连接超时异常");
+                System.out.println("超时ConnectException异常");
             }else if (e instanceof ExecutionException) {
-                System.out.println("连接超时异常");
+                System.out.println("超时ExecutionException异常");
             }  else if (e instanceof TimeoutException) {
                 System.out.println("超时异常");
             } else if (e instanceof SocketTimeoutException) {

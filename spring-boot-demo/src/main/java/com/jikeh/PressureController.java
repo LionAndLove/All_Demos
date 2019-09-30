@@ -1,8 +1,10 @@
 package com.jikeh;
 
+import com.jikeh.performance.pool.ServerActiveServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -13,6 +15,45 @@ import java.io.OutputStream;
  */
 @RestController
 public class PressureController {
+
+    @Resource
+    ServerActiveServiceImpl serverActiveService;
+
+    /**
+     * asyncGet方式压测：
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping(value = "/asyncGet", method = RequestMethod.POST)
+    public void asyncGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setHeader("Connection", "keep-alive");
+        OutputStream out = response.getOutputStream();
+        serverActiveService.sendHttpGetByAsync("");
+        response.setStatus(200);
+        out.write(getContent());
+        out.close();
+    }
+
+    /**
+     * syncGet方式压测：
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping(value = "/syncGet", method = RequestMethod.POST)
+    public void syncGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setHeader("Connection", "keep-alive");
+        OutputStream out = response.getOutputStream();
+        serverActiveService.sendHttpGetBySync("");
+        response.setStatus(200);
+        out.write(getContent());
+        out.close();
+    }
 
     /**
      * bio方式压测：

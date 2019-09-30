@@ -9,6 +9,7 @@ import java.util.concurrent.TimeoutException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
@@ -47,52 +48,66 @@ public class AsyncClientHttpExchangeFutureCallback {
 
     }
 
-    public static void main(final String[] args) throws Exception {
-        final HttpResponse[] httpResponse = new HttpResponse[1];
+    public static void main(final String[] args) {
         try {
-            final HttpGet request = new HttpGet("http://baidu.com/");
-            Future<HttpResponse> responseFuture = httpclient.execute(request, new FutureCallback<HttpResponse>() {
+            new AsyncClientHttpExchangeFutureCallback().getConCall();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-                @Override
-                public void completed(final HttpResponse response) {
-                    System.out.println(request.getRequestLine() + "->" + response.getStatusLine());
-
-                    //                        System.out.println(EntityUtils.toString(response.getEntity()));
-                    httpResponse[0] = response;
-
-                }
-
-                @Override
-                public void failed(final Exception ex) {
-
-                }
-
-                @Override
-                public void cancelled() {
-                    System.out.println(request.getRequestLine() + " cancelled");
-                }
-
-            });
+    private void getConCall() throws IOException {
+        try {
+            HttpGet request = new HttpGet("https://blog.csdn.net/cangchen/article/details/44063359");
+            httpclient.execute(request, new GetConfCall());
             try{
-                HttpResponse response = responseFuture.get();
+//                HttpResponse response = responseFuture.get();
 //                System.out.println(EntityUtils.toString(response.getEntity()));
-                HttpResponse temp = httpResponse[0];
-                System.out.println(EntityUtils.toString(temp.getEntity()));
             }catch (Exception ex){
-                if(ex instanceof TimeoutException){
-                    System.out.println("连接超时");
-                }else if(ex instanceof SocketTimeoutException){
-                    System.out.println("传输超时");
-                }else {
-                    System.out.println("未知异常");
-                }
-//                e.printStackTrace();
+
             }
             System.out.println("Shutting down");
         } finally {
-            httpclient.close();
+            //关闭了，肯定就无法回调了呀
+//            httpclient.close();
         }
         System.out.println("Done");
+    }
+
+    /**
+     * 被回调的对象，给异步的httpclient使用
+     *
+     * */
+    class GetConfCall implements FutureCallback<HttpResponse> {
+
+        @Override
+        public void completed(final HttpResponse response) {
+            try {
+                System.out.println(EntityUtils.toString(response.getEntity()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void failed(final Exception ex) {
+            if(ex instanceof TimeoutException){
+                System.out.println("连接超时");
+            }else if(ex instanceof SocketTimeoutException){
+                System.out.println("传输超时");
+            }else {
+                System.out.println("未知异常");
+            }
+            ex.printStackTrace();
+        }
+
+        @Override
+        public void cancelled() {
+
+        }
+
+
+
     }
 
 }
