@@ -14,7 +14,7 @@ public class HelloController {
 	@RequestMapping("/hello")
 	@ResponseBody
 	public String hello(String name) {
-		logger.info("Hello World");
+		logger.debug("Hello World");
 		return "hello, " + name;
 	}
 	
