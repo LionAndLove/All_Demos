@@ -77,3 +77,41 @@
 2019-10-09 15:25:23,094 INFO o.a.c.h.Http11NioProtocol [main] Starting ProtocolHandler ["http-nio-1111"]
 2019-10-09 15:25:23,096 INFO o.a.t.u.n.NioSelectorPool [main] Using a shared selector for servlet write/read
 2019-10-09 15:25:23,118 INFO c.j.SpringBootMain [main] Started SpringBootMain in 3.242 seconds (JVM running for 5.307)
+2019-10-09 15:50:44,467 INFO c.j.SpringBootMain [main] Starting SpringBootMain on jikehcn with PID 18012 (E:\JiKeHCN-RELEASE\spring-boot-demo\target\classes started by Administrator in E:\JiKeHCN-RELEASE\spring-boot-demo)
+2019-10-09 15:50:44,470 DEBUG c.j.SpringBootMain [main] Running with Spring Boot v1.5.16.RELEASE, Spring v4.3.19.RELEASE
+2019-10-09 15:50:44,470 INFO c.j.SpringBootMain [main] The following profiles are active: test
+2019-10-09 15:50:47,715 INFO c.j.SpringBootMain [main] Started SpringBootMain in 3.564 seconds (JVM running for 6.218)
+2019-10-09 15:52:12,694 INFO c.j.SpringBootMain [main] Starting SpringBootMain on jikehcn with PID 6488 (E:\JiKeHCN-RELEASE\spring-boot-demo\target\classes started by Administrator in E:\JiKeHCN-RELEASE\spring-boot-demo)
+2019-10-09 15:52:12,697 DEBUG c.j.SpringBootMain [main] Running with Spring Boot v1.5.16.RELEASE, Spring v4.3.19.RELEASE
+2019-10-09 15:52:12,697 INFO c.j.SpringBootMain [main] The following profiles are active: test
+2019-10-09 15:52:15,880 INFO c.j.SpringBootMain [main] Started SpringBootMain in 3.507 seconds (JVM running for 6.078)
+2019-10-09 15:52:22,812 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:53:41,395 INFO c.j.c.HelloController [http-nio-1111-exec-5] Hello World
+2019-10-09 15:53:42,346 INFO c.j.c.HelloController [http-nio-1111-exec-7] Hello World
+2019-10-09 15:53:43,047 INFO c.j.c.HelloController [http-nio-1111-exec-10] Hello World
+2019-10-09 15:53:43,322 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:53:43,533 INFO c.j.c.HelloController [http-nio-1111-exec-3] Hello World
+2019-10-09 15:53:43,725 INFO c.j.c.HelloController [http-nio-1111-exec-5] Hello World
+2019-10-09 15:53:43,909 INFO c.j.c.HelloController [http-nio-1111-exec-7] Hello World
+2019-10-09 15:53:44,107 INFO c.j.c.HelloController [http-nio-1111-exec-10] Hello World
+2019-10-09 15:53:44,310 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:53:44,505 INFO c.j.c.HelloController [http-nio-1111-exec-3] Hello World
+2019-10-09 15:53:44,710 INFO c.j.c.HelloController [http-nio-1111-exec-5] Hello World
+2019-10-09 15:53:44,907 INFO c.j.c.HelloController [http-nio-1111-exec-7] Hello World
+2019-10-09 15:53:45,110 INFO c.j.c.HelloController [http-nio-1111-exec-10] Hello World
+2019-10-09 15:53:45,289 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:53:45,495 INFO c.j.c.HelloController [http-nio-1111-exec-3] Hello World
+2019-10-09 15:53:45,681 INFO c.j.c.HelloController [http-nio-1111-exec-5] Hello World
+2019-10-09 15:53:45,904 INFO c.j.c.HelloController [http-nio-1111-exec-7] Hello World
+2019-10-09 15:53:46,124 INFO c.j.c.HelloController [http-nio-1111-exec-10] Hello World
+2019-10-09 15:53:46,557 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:53:46,745 INFO c.j.c.HelloController [http-nio-1111-exec-3] Hello World
+2019-10-09 15:53:46,943 INFO c.j.c.HelloController [http-nio-1111-exec-5] Hello World
+2019-10-09 15:53:47,161 INFO c.j.c.HelloController [http-nio-1111-exec-7] Hello World
+2019-10-09 15:53:47,523 INFO c.j.c.HelloController [http-nio-1111-exec-10] Hello World
+2019-10-09 15:53:47,756 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 16:17:49,794 INFO c.j.SpringBootMain [main] Starting SpringBootMain on jikehcn with PID 1952 (E:\JiKeHCN-RELEASE\spring-boot-demo\target\classes started by Administrator in E:\JiKeHCN-RELEASE\spring-boot-demo)
+2019-10-09 16:17:49,797 DEBUG c.j.SpringBootMain [main] Running with Spring Boot v1.5.16.RELEASE, Spring v4.3.19.RELEASE
+2019-10-09 16:17:49,797 INFO c.j.SpringBootMain [main] The following profiles are active: test
+2019-10-09 16:17:52,714 INFO c.j.SpringBootMain [main] Started SpringBootMain in 3.208 seconds (JVM running for 5.509)
+2019-10-09 16:17:58,208 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
