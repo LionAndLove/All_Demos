@@ -1,0 +1,117 @@
+2019-10-09 15:22:01,835 INFO c.j.SpringBootMain [main] Starting SpringBootMain on jikehcn with PID 6500 (E:\JiKeHCN-RELEASE\spring-boot-demo\target\classes started by Administrator in E:\JiKeHCN-RELEASE\spring-boot-demo)
+2019-10-09 15:22:01,839 DEBUG c.j.SpringBootMain [main] Running with Spring Boot v1.5.16.RELEASE, Spring v4.3.19.RELEASE
+2019-10-09 15:22:01,839 INFO c.j.SpringBootMain [main] The following profiles are active: test
+2019-10-09 15:22:04,790 INFO c.j.SpringBootMain [main] Started SpringBootMain in 3.28 seconds (JVM running for 5.614)
+2019-10-09 15:22:31,805 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:22:33,717 INFO c.j.c.HelloController [http-nio-1111-exec-3] Hello World
+2019-10-09 15:22:34,380 INFO c.j.c.HelloController [http-nio-1111-exec-5] Hello World
+2019-10-09 15:22:50,077 INFO c.j.SpringBootMain [main] Starting SpringBootMain on jikehcn with PID 19192 (E:\JiKeHCN-RELEASE\spring-boot-demo\target\classes started by Administrator in E:\JiKeHCN-RELEASE\spring-boot-demo)
+2019-10-09 15:22:50,082 DEBUG c.j.SpringBootMain [main] Running with Spring Boot v1.5.16.RELEASE, Spring v4.3.19.RELEASE
+2019-10-09 15:22:50,082 INFO c.j.SpringBootMain [main] The following profiles are active: test
+2019-10-09 15:22:52,981 INFO c.j.SpringBootMain [main] Started SpringBootMain in 3.245 seconds (JVM running for 5.353)
+2019-10-09 15:23:40,543 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:23:41,980 INFO c.j.c.HelloController [http-nio-1111-exec-3] Hello World
+2019-10-09 15:24:38,601 INFO c.j.SpringBootMain [main] Starting SpringBootMain on jikehcn with PID 19976 (E:\JiKeHCN-RELEASE\spring-boot-demo\target\classes started by Administrator in E:\JiKeHCN-RELEASE\spring-boot-demo)
+2019-10-09 15:24:38,604 DEBUG c.j.SpringBootMain [main] Running with Spring Boot v1.5.16.RELEASE, Spring v4.3.19.RELEASE
+2019-10-09 15:24:38,605 INFO c.j.SpringBootMain [main] The following profiles are active: test
+2019-10-09 15:24:38,638 INFO o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext [main] Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@eadd4fb: startup date [Wed Oct 09 15:24:38 CST 2019]; root of context hierarchy
+2019-10-09 15:24:38,836 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 5.3.6.Final
+2019-10-09 15:24:39,755 INFO o.s.b.c.e.t.TomcatEmbeddedServletContainer [main] Tomcat initialized with port(s): 1111 (http)
+2019-10-09 15:24:39,766 INFO o.a.c.h.Http11NioProtocol [main] Initializing ProtocolHandler ["http-nio-1111"]
+2019-10-09 15:24:39,774 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2019-10-09 15:24:39,775 INFO o.a.c.c.StandardEngine [main] Starting Servlet Engine: Apache Tomcat/8.5.34
+2019-10-09 15:24:39,913 INFO o.a.c.c.C.[.[.[/] [localhost-startStop-1] Initializing Spring embedded WebApplicationContext
+2019-10-09 15:24:39,913 INFO o.s.w.c.ContextLoader [localhost-startStop-1] Root WebApplicationContext: initialization completed in 1275 ms
+2019-10-09 15:24:40,127 INFO o.s.b.w.s.ServletRegistrationBean [localhost-startStop-1] Mapping servlet: 'dispatcherServlet' to [/]
+2019-10-09 15:24:40,132 INFO o.s.b.w.s.FilterRegistrationBean [localhost-startStop-1] Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-10-09 15:24:40,132 INFO o.s.b.w.s.FilterRegistrationBean [localhost-startStop-1] Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-10-09 15:24:40,132 INFO o.s.b.w.s.FilterRegistrationBean [localhost-startStop-1] Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-10-09 15:24:40,132 INFO o.s.b.w.s.FilterRegistrationBean [localhost-startStop-1] Mapping filter: 'requestContextFilter' to: [/*]
+2019-10-09 15:24:41,248 INFO o.s.w.s.m.m.a.RequestMappingHandlerAdapter [main] Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@eadd4fb: startup date [Wed Oct 09 15:24:38 CST 2019]; root of context hierarchy
+2019-10-09 15:24:41,296 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/hello]}" onto public java.lang.String com.jikeh.controller.HelloController.hello(java.lang.String)
+2019-10-09 15:24:41,297 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/okNio],methods=[POST]}" onto public void com.jikeh.PressureController.getByOkNio(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:24:41,298 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/nio],methods=[POST]}" onto public void com.jikeh.PressureController.getByNio(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:24:41,298 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/okBio],methods=[POST]}" onto public void com.jikeh.PressureController.getByOkBio(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:24:41,298 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/bio],methods=[POST]}" onto public void com.jikeh.PressureController.getByBio(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:24:41,298 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/asyncGet],methods=[POST]}" onto public void com.jikeh.PressureController.asyncGet(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:24:41,299 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/netty],methods=[POST]}" onto public void com.jikeh.PressureController.getByNetty(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:24:41,299 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/syncGet],methods=[POST]}" onto public void com.jikeh.PressureController.syncGet(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:24:41,301 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-10-09 15:24:41,302 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-10-09 15:24:41,323 INFO o.s.w.s.h.SimpleUrlHandlerMapping [main] Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-09 15:24:41,324 INFO o.s.w.s.h.SimpleUrlHandlerMapping [main] Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-09 15:24:41,352 INFO o.s.w.s.h.SimpleUrlHandlerMapping [main] Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-09 15:24:41,460 INFO o.s.j.e.a.AnnotationMBeanExporter [main] Registering beans for JMX exposure on startup
+2019-10-09 15:24:41,472 INFO o.a.c.h.Http11NioProtocol [main] Starting ProtocolHandler ["http-nio-1111"]
+2019-10-09 15:24:41,475 INFO o.a.t.u.n.NioSelectorPool [main] Using a shared selector for servlet write/read
+2019-10-09 15:24:41,493 INFO o.s.b.c.e.t.TomcatEmbeddedServletContainer [main] Tomcat started on port(s): 1111 (http)
+2019-10-09 15:24:41,498 INFO c.j.SpringBootMain [main] Started SpringBootMain in 3.191 seconds (JVM running for 5.188)
+2019-10-09 15:24:47,897 INFO o.a.c.c.C.[.[.[/] [http-nio-1111-exec-1] Initializing Spring FrameworkServlet 'dispatcherServlet'
+2019-10-09 15:24:47,897 INFO o.s.w.s.DispatcherServlet [http-nio-1111-exec-1] FrameworkServlet 'dispatcherServlet': initialization started
+2019-10-09 15:24:47,929 INFO o.s.w.s.DispatcherServlet [http-nio-1111-exec-1] FrameworkServlet 'dispatcherServlet': initialization completed in 32 ms
+2019-10-09 15:24:47,956 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:25:20,199 INFO c.j.SpringBootMain [main] Starting SpringBootMain on jikehcn with PID 15796 (E:\JiKeHCN-RELEASE\spring-boot-demo\target\classes started by Administrator in E:\JiKeHCN-RELEASE\spring-boot-demo)
+2019-10-09 15:25:20,202 DEBUG c.j.SpringBootMain [main] Running with Spring Boot v1.5.16.RELEASE, Spring v4.3.19.RELEASE
+2019-10-09 15:25:20,203 INFO c.j.SpringBootMain [main] The following profiles are active: test
+2019-10-09 15:25:20,425 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 5.3.6.Final
+2019-10-09 15:25:21,328 INFO o.a.c.h.Http11NioProtocol [main] Initializing ProtocolHandler ["http-nio-1111"]
+2019-10-09 15:25:21,338 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2019-10-09 15:25:21,339 INFO o.a.c.c.StandardEngine [main] Starting Servlet Engine: Apache Tomcat/8.5.34
+2019-10-09 15:25:21,503 INFO o.a.c.c.C.[.[.[/] [localhost-startStop-1] Initializing Spring embedded WebApplicationContext
+2019-10-09 15:25:21,503 INFO o.s.w.c.ContextLoader [localhost-startStop-1] Root WebApplicationContext: initialization completed in 1267 ms
+2019-10-09 15:25:22,859 INFO o.s.w.s.m.m.a.RequestMappingHandlerAdapter [main] Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7bd7d6d6: startup date [Wed Oct 09 15:25:20 CST 2019]; root of context hierarchy
+2019-10-09 15:25:22,908 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/hello]}" onto public java.lang.String com.jikeh.controller.HelloController.hello(java.lang.String)
+2019-10-09 15:25:22,910 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/nio],methods=[POST]}" onto public void com.jikeh.PressureController.getByNio(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:25:22,911 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/syncGet],methods=[POST]}" onto public void com.jikeh.PressureController.syncGet(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:25:22,911 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/okBio],methods=[POST]}" onto public void com.jikeh.PressureController.getByOkBio(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:25:22,911 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/bio],methods=[POST]}" onto public void com.jikeh.PressureController.getByBio(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:25:22,911 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/okNio],methods=[POST]}" onto public void com.jikeh.PressureController.getByOkNio(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:25:22,912 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/asyncGet],methods=[POST]}" onto public void com.jikeh.PressureController.asyncGet(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:25:22,912 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/netty],methods=[POST]}" onto public void com.jikeh.PressureController.getByNetty(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2019-10-09 15:25:22,914 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-10-09 15:25:22,915 INFO o.s.w.s.m.m.a.RequestMappingHandlerMapping [main] Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-10-09 15:25:22,938 INFO o.s.w.s.h.SimpleUrlHandlerMapping [main] Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-09 15:25:22,938 INFO o.s.w.s.h.SimpleUrlHandlerMapping [main] Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-09 15:25:22,967 INFO o.s.w.s.h.SimpleUrlHandlerMapping [main] Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-09 15:25:23,083 INFO o.s.j.e.a.AnnotationMBeanExporter [main] Registering beans for JMX exposure on startup
+2019-10-09 15:25:23,094 INFO o.a.c.h.Http11NioProtocol [main] Starting ProtocolHandler ["http-nio-1111"]
+2019-10-09 15:25:23,096 INFO o.a.t.u.n.NioSelectorPool [main] Using a shared selector for servlet write/read
+2019-10-09 15:25:23,118 INFO c.j.SpringBootMain [main] Started SpringBootMain in 3.242 seconds (JVM running for 5.307)
+2019-10-09 15:50:44,467 INFO c.j.SpringBootMain [main] Starting SpringBootMain on jikehcn with PID 18012 (E:\JiKeHCN-RELEASE\spring-boot-demo\target\classes started by Administrator in E:\JiKeHCN-RELEASE\spring-boot-demo)
+2019-10-09 15:50:44,470 DEBUG c.j.SpringBootMain [main] Running with Spring Boot v1.5.16.RELEASE, Spring v4.3.19.RELEASE
+2019-10-09 15:50:44,470 INFO c.j.SpringBootMain [main] The following profiles are active: test
+2019-10-09 15:50:47,715 INFO c.j.SpringBootMain [main] Started SpringBootMain in 3.564 seconds (JVM running for 6.218)
+2019-10-09 15:52:12,694 INFO c.j.SpringBootMain [main] Starting SpringBootMain on jikehcn with PID 6488 (E:\JiKeHCN-RELEASE\spring-boot-demo\target\classes started by Administrator in E:\JiKeHCN-RELEASE\spring-boot-demo)
+2019-10-09 15:52:12,697 DEBUG c.j.SpringBootMain [main] Running with Spring Boot v1.5.16.RELEASE, Spring v4.3.19.RELEASE
+2019-10-09 15:52:12,697 INFO c.j.SpringBootMain [main] The following profiles are active: test
+2019-10-09 15:52:15,880 INFO c.j.SpringBootMain [main] Started SpringBootMain in 3.507 seconds (JVM running for 6.078)
+2019-10-09 15:52:22,812 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:53:41,395 INFO c.j.c.HelloController [http-nio-1111-exec-5] Hello World
+2019-10-09 15:53:42,346 INFO c.j.c.HelloController [http-nio-1111-exec-7] Hello World
+2019-10-09 15:53:43,047 INFO c.j.c.HelloController [http-nio-1111-exec-10] Hello World
+2019-10-09 15:53:43,322 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:53:43,533 INFO c.j.c.HelloController [http-nio-1111-exec-3] Hello World
+2019-10-09 15:53:43,725 INFO c.j.c.HelloController [http-nio-1111-exec-5] Hello World
+2019-10-09 15:53:43,909 INFO c.j.c.HelloController [http-nio-1111-exec-7] Hello World
+2019-10-09 15:53:44,107 INFO c.j.c.HelloController [http-nio-1111-exec-10] Hello World
+2019-10-09 15:53:44,310 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:53:44,505 INFO c.j.c.HelloController [http-nio-1111-exec-3] Hello World
+2019-10-09 15:53:44,710 INFO c.j.c.HelloController [http-nio-1111-exec-5] Hello World
+2019-10-09 15:53:44,907 INFO c.j.c.HelloController [http-nio-1111-exec-7] Hello World
+2019-10-09 15:53:45,110 INFO c.j.c.HelloController [http-nio-1111-exec-10] Hello World
+2019-10-09 15:53:45,289 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:53:45,495 INFO c.j.c.HelloController [http-nio-1111-exec-3] Hello World
+2019-10-09 15:53:45,681 INFO c.j.c.HelloController [http-nio-1111-exec-5] Hello World
+2019-10-09 15:53:45,904 INFO c.j.c.HelloController [http-nio-1111-exec-7] Hello World
+2019-10-09 15:53:46,124 INFO c.j.c.HelloController [http-nio-1111-exec-10] Hello World
+2019-10-09 15:53:46,557 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 15:53:46,745 INFO c.j.c.HelloController [http-nio-1111-exec-3] Hello World
+2019-10-09 15:53:46,943 INFO c.j.c.HelloController [http-nio-1111-exec-5] Hello World
+2019-10-09 15:53:47,161 INFO c.j.c.HelloController [http-nio-1111-exec-7] Hello World
+2019-10-09 15:53:47,523 INFO c.j.c.HelloController [http-nio-1111-exec-10] Hello World
+2019-10-09 15:53:47,756 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World
+2019-10-09 16:17:49,794 INFO c.j.SpringBootMain [main] Starting SpringBootMain on jikehcn with PID 1952 (E:\JiKeHCN-RELEASE\spring-boot-demo\target\classes started by Administrator in E:\JiKeHCN-RELEASE\spring-boot-demo)
+2019-10-09 16:17:49,797 DEBUG c.j.SpringBootMain [main] Running with Spring Boot v1.5.16.RELEASE, Spring v4.3.19.RELEASE
+2019-10-09 16:17:49,797 INFO c.j.SpringBootMain [main] The following profiles are active: test
+2019-10-09 16:17:52,714 INFO c.j.SpringBootMain [main] Started SpringBootMain in 3.208 seconds (JVM running for 5.509)
+2019-10-09 16:17:58,208 INFO c.j.c.HelloController [http-nio-1111-exec-1] Hello World

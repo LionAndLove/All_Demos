@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- No need to set system property "log4j2.contextSelector" to any value
-     when using <asyncLogger> or <asyncRoot>. -->
-
-<Configuration status="WARN">
+<Configuration status="DEBUG">
+    <Properties>
+        <property name="CONTEXT_NAME" value="adx" />
+        <property name="LOG_PATH" value="${adxlog.home:-./logs/logs_adx_test}" />
+    </Properties>
     <Appenders>
-        <!-- Async Loggers will auto-flush in batches, so switch off immediateFlush. -->
-        <RandomAccessFile name="RandomAccessFile" fileName="asyncWithLocation.log"
-                          immediateFlush="false" append="false">
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] -%-5level %logger{36}:%L - %msg%n"/>
+        </Console>
+
+        <RollingRandomAccessFile name="LogToRollingRandomAccessFile" fileName="${LOG_PATH}/${CONTEXT_NAME}-common.log" filePattern="${LOG_PATH}/${CONTEXT_NAME}-common-%d{yyyy-MM-dd}.%i.log">
             <PatternLayout>
-                <Pattern>%d %p %class{1.} [%t] %location %m %ex%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %X{mdc_trace_id} - %msg%n</Pattern>
             </PatternLayout>
-        </RandomAccessFile>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1 B"/>
+            </Policies>
+            <DefaultRolloverStrategy max="24">
+                <Delete basePath="${LOG_PATH}" maxDepth="2">
+                    <IfFileName glob="${CONTEXT_NAME}-common*.log" />
+                    <IfLastModified age="1M" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingRandomAccessFile>
+
     </Appenders>
     <Loggers>
-        <!-- pattern layout actually uses location, so we need to include it -->
-        <AsyncLogger name="com.jikeh.controller" level="trace" includeLocation="true">
-            <AppenderRef ref="RandomAccessFile"/>
+        <!--  asynchronous loggers -->
+        <AsyncLogger name="com.jikeh" level="debug" additivity="false">
+            <AppenderRef ref="LogToRollingRandomAccessFile"/>
         </AsyncLogger>
-        <Root level="info" includeLocation="true">
-            <AppenderRef ref="RandomAccessFile"/>
+
+        <!-- synchronous loggers -->
+        <Root level="info">
+            <AppenderRef ref="LogToConsole"/>
         </Root>
     </Loggers>
+
 </Configuration>
